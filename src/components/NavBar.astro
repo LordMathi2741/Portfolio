@@ -1,0 +1,201 @@
+---
+import SideBar from "./SideBar.astro";
+import languages from "../assets/data/languages.js";
+import { getLangFromUrl, useTranslations } from '../i18n/util.ts';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<nav>
+    <ul>
+        <div aria-label="My Works section">
+            <a href="#work-section">
+            <span class="material-icons">
+                work
+            </span>
+            <div class="display">
+                <p>{t('nav.works')}</p>
+            </div>
+            </a>
+        </div>
+
+        <div aria-label="My Achievements section">
+            <a href="#achievements-section">
+                <span class="material-icons">
+                    school
+                </span>
+                <div class="display">
+                    <p>{t('nav.achievements')}</p>
+                </div>
+            </a>
+        </div>
+
+        <div aria-label="My experience section">
+           <a href="#experience-section">
+                <span class="material-icons">
+                    history
+                </span>
+                <div class="display" >
+                    <p>{t('nav.experience')}</p>
+                </div>
+           </a>
+        </div>
+
+        <select class="select-lang" data-languages={JSON.stringify(languages)}>
+
+        </select>
+    </ul>
+    <button class="toggle-btn" onclick="toggleMenu()">
+        <span class="material-icons">menu</span>
+    </button>
+</nav>
+
+<div class="sidebar-toggle">
+    <SideBar />
+</div>
+
+<div class="overlay"></div>
+
+<script is:client>
+    const sidebar = document.getElementsByClassName('sidebar-toggle')[0];
+    const overlay = document.getElementsByClassName('overlay')[0];
+    const selectLang = document.getElementsByClassName('select-lang')[0];
+    const languages = JSON.parse(selectLang.getAttribute('data-languages'));
+
+    const currentLanguage = new URL(window.location.href).pathname.split('/')[1];
+
+    function toggleMenu() {
+        sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+    }
+
+    languages.forEach(language => {
+        const option = document.createElement('option');
+        option.value = language.value;
+        option.textContent = language.flag;
+        if (language.value === currentLanguage) {
+            option.selected = true;
+        }
+        selectLang.appendChild(option);
+    });
+
+    selectLang.addEventListener('change', (event) => {
+        const selectedLanguage = event.target.value;
+        const url = new URL(window.location.href);
+        const currentPath = url.pathname.split('/').slice(2).join('/'); 
+        const newPath = `/${selectedLanguage}/${currentPath}`; 
+        url.pathname = newPath;
+        window.location.href = url.href; 
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            sidebar.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    });
+</script>
+
+
+<style>
+    .select-lang {
+        background-color: transparent;
+        border: 2px solid transparent;
+        font-size: 3rem;
+        color: #fff;
+        appearance: none;
+    }
+
+    .sidebar-toggle {
+        display: none;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+
+    p{
+        font-size: 1rem;
+        margin-top: 20px;
+    }
+
+    nav {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        padding: 1rem;
+        padding: 20px;
+        border-radius: 25px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
+    }
+
+    li {
+        margin-bottom: 1rem;
+    }
+
+    .material-icons {
+        font-size: 3rem;
+        color: var(--primary-color);
+    }
+
+    .display {
+        display: none;
+        position: absolute;
+        background-color: black;
+        width: 100px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .material-icons:hover + .display {
+        display: block;
+    }
+
+    span:hover {
+        cursor: pointer;
+        color: #00ADB5;
+    }
+
+    .toggle-btn {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        ul {
+            display: none;
+        }
+
+        .toggle-btn {
+            display: block;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border-color: transparent;
+            margin-right: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: end;
+        }
+    }
+</style>

@@ -1,0 +1,92 @@
+
+*{
+    scroll-behavior: smooth;
+}
+.section{
+    padding: 50px;
+    animation: fade-in-up 1s;
+}
+
+.section h1{
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #eeeeee;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.flexible{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    
+}
+
+.developer-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 300px;
+    padding: 50px;
+    margin-left: 30px;
+    margin-top: 200px;
+    border-radius: 15px;
+}
+
+.developer-card h1{
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+.developer-card h2{
+    color: var(--secondary-color);
+    letter-spacing: 0.5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.developer-card img{
+   border-radius: 15px;
+}
+
+@media screen and (max-width: 1513px){
+    .developer-card{
+        margin-top: 150px;
+    }
+}
+
+@media screen and (max-width: 1366px){
+    .developer-card{
+        margin-top: 50px;
+    }
+
+}
+
+@media screen and (max-width: 1064px){
+    .flexible{
+        flex-direction: column;
+        gap: 0;
+    }
+    .developer-card{
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .section h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 425px){
+    .section h1 {
+        font-size: 2rem;
+    }
+
+    .developer-card{
+        width: 250px;
+        padding: 30px;
+    }
+}

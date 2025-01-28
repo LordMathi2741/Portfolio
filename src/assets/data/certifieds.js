@@ -1,0 +1,86 @@
+export const certfieds = [
+    {
+        title: "Hackaton EduHack 2024",
+        description: "Solagri Perú",
+        image: "https://media.licdn.com/dms/image/v2/D4E0BAQEau4wqvZUbMA/company-logo_100_100/company-logo_100_100/0/1693672678717/solagriperusac_logo?e=1746057600&v=beta&t=zHBN6xN8BA8Z1RV6J4ms8cKkH9Zf8rQpo-rVsYU5q0k",
+        url: "https://drive.google.com/file/d/1wFtvy73amd8w4zRRO8VDFqWVTQ-2FOo2/view",
+    },
+    {
+        title: "Microservicios desde Cero con NestJs, TypeScript, RabbitMQ, Docker, JWT, Passport, Guard, Swagger, AWS, Mongoose y más!",
+        description: "Udemy",
+        image: "https://media.licdn.com/dms/image/v2/D560BAQEf_NHzN2yVQg/company-logo_100_100/company-logo_100_100/0/1723593046388/udemy_logo?e=1746057600&v=beta&t=peDDyxHOgSt21Ms0MpLZupR5Q9xw9-zCxLIy7XfNuQw",
+        url: "https://drive.google.com/file/d/1ecpVyz-ybFRUcwa9PZkQwx9Jen9EARgn/view",
+    },
+    {
+        title: "Computer Networks and Network Security",
+        description: "IBM",
+        image: "https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1746057600&v=beta&t=59keVqBtKChCwoZHD4JIKq5GYPRfK8Pbk6GP1ctx7yM",
+        url: "https://www.coursera.org/account/accomplishments/verify/WPUMF76T4ZYK",
+    },
+    {
+        title: "Cybersecurity Compliance Framework, Standards & Regulations",
+        description: "IBM",
+        image: "https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1746057600&v=beta&t=59keVqBtKChCwoZHD4JIKq5GYPRfK8Pbk6GP1ctx7yM",
+        url: "https://www.coursera.org/account/accomplishments/verify/5HEX9Z9TC5E4",
+    },
+    {
+        title: "IBM Cybersecurity Analyst Specialization",
+        description: "IBM",
+        image: "https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1746057600&v=beta&t=59keVqBtKChCwoZHD4JIKq5GYPRfK8Pbk6GP1ctx7yM",
+        url: "https://www.coursera.org/account/accomplishments/specialization/MV392REFVUWJ",
+    },
+    {
+        title: "Introduction to Cybersecurity Tools & Cyberattacks",
+        description: "IBM",
+        image: "https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1746057600&v=beta&t=59keVqBtKChCwoZHD4JIKq5GYPRfK8Pbk6GP1ctx7yM",
+        url: "https://www.coursera.org/account/accomplishments/verify/DE2J49VBB65T",
+    },
+    {
+        title: "Python para no matemáticos: De 0 hasta reconocimiento facial",
+        description: "Aurixen Group",
+        image: "https://media.licdn.com/dms/image/v2/D4D0BAQF6Z3u6rGFelQ/company-logo_100_100/company-logo_100_100/0/1711357513882/udemy_elearning_alumni_logo?e=1746057600&v=beta&t=nURtZn4_obtGIq0LHolh7CtUCZV4ogHdXy-ZL6DkwSk",
+        url: "https://udemy-certificate.s3.amazonaws.com/pdf/UC-a776df3d-2fac-40c2-951d-1048ee483e32.pdf",
+    },
+    {
+        title: "Introduction to MongoDB",
+        description: "MongoDB",
+        image: "https://media.licdn.com/dms/image/v2/C4D0BAQFKe8PwqzyHyA/company-logo_100_100/company-logo_100_100/0/1635171226992/mongodbinc_logo?e=1746057600&v=beta&t=XaANkHmQYpa_L5kqq0NzUTO5QIu1BXMVEPEHmfwD0v0",
+        url: "https://drive.google.com/file/d/18HA1_yb6EXYqxYbXU7vKswP1f629I_Kr/view",
+    },
+    {
+        title: "Learn SQL Basics for Data Science Specialization",
+        description: "University of California, Davis",
+        image: "https://media.licdn.com/dms/image/v2/C4E0BAQEBG25KNBwuCQ/company-logo_100_100/company-logo_100_100/0/1630629297217/uc_davis_logo?e=1746057600&v=beta&t=g9AUQr8-bwCfrAnfFU5FlWtafnfPX-LUU35q_6WvOQM",
+        url: "https://www.coursera.org/account/accomplishments/specialization/CZ3UHXBE92PZ",
+    },
+    {
+        title: "SQL for Data Science Capstone Project",
+        description: "University of California, Davis",
+        image: "https://media.licdn.com/dms/image/v2/C4E0BAQEBG25KNBwuCQ/company-logo_100_100/company-logo_100_100/0/1630629297217/uc_davis_logo?e=1746057600&v=beta&t=g9AUQr8-bwCfrAnfFU5FlWtafnfPX-LUU35q_6WvOQM",
+        url: "https://www.coursera.org/account/accomplishments/verify/5MF22FH9RH5Q",
+    },
+    {
+        title: "SQL for Data Science",
+        description: "University of California, Davis",
+        image: "https://media.licdn.com/dms/image/v2/C4E0BAQEBG25KNBwuCQ/company-logo_100_100/company-logo_100_100/0/1630629297217/uc_davis_logo?e=1746057600&v=beta&t=g9AUQr8-bwCfrAnfFU5FlWtafnfPX-LUU35q_6WvOQM",
+        url: "https://www.coursera.org/account/accomplishments/verify/GC44U3JQD2D4",
+    },
+    {
+        title: "Scrum Fundamentals",
+        description: "SCRUMstudy - Accreditation Body for Scrum and Agile",
+        image: "https://media.licdn.com/dms/image/v2/C4E0BAQG9_uP8f-kpiw/company-logo_100_100/company-logo_100_100/0/1631356592679?e=1746057600&v=beta&t=no6ZOF-L9lreu0tMxtvPPWujzggdXUtMGQVoQ4xz4YE",
+        url: "https://drive.google.com/file/d/1VVhUrTd5lTXTJTWAuCKDouSWSahlqyIC/view",
+    },
+    {
+        title: "Seguridad informática: defensa contra las artes oscuras digitales",
+        description: "Google",
+        image: "https://media.licdn.com/dms/image/v2/C4D0BAQHiNSL4Or29cg/company-logo_100_100/company-logo_100_100/0/1631311446380?e=1746057600&v=beta&t=1OqPk28A0aGRZApxAs4xamI0183RfsWrbolWtkFFuaE",
+        url: "https://www.coursera.org/account/accomplishments/verify/DVPCJLKWSZKL",
+    },
+    {
+        title: "Introducción al desarrollo web",
+        description: "Universidad de los Andes",
+        image: "https://media.licdn.com/dms/image/v2/D560BAQFH_pLEB1gHpA/company-logo_100_100/company-logo_100_100/0/1707317490593?e=1746057600&v=beta&t=VUiiRV0cv4bdX6Gutc3Clszxm-_5B81DlwCyRyxXiBs",
+        url: "https://www.coursera.org/account/accomplishments/verify/RLDCDY8QZS5M",
+    },
+];

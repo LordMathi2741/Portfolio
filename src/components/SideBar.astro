@@ -1,0 +1,132 @@
+---
+import languages from "../assets/data/languages.js";
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<nav>
+    <ul>
+        <div aria-label="My Works section">
+            <a href="#work-section">
+            <span class="material-icons">
+                work
+            </span>
+            <div class="display">
+                <p>{t('nav.works')}</p>
+            </div>
+            </a>
+        </div>
+
+        <div aria-label="My Achievements section">
+            <a href="#achievements-section">
+                <span class="material-icons">
+                    school
+                </span>
+                <div class="display">
+                    <p>{t('nav.achievements')}</p>
+                </div>
+            </a>
+        </div>
+
+        <div aria-label="My experience section">
+           <a href="#experience-section">
+                <span class="material-icons">
+                    history
+                </span>
+                <div class="display" >
+                    <p>{t('nav.experience')}</p>
+                </div>
+           </a>
+        </div>
+
+        <select class="select-lang" id="language-selector">
+            {languages.map(language => (
+                <option value={language.value} selected={language.value === lang}>
+                    {language.flag}
+                </option>
+            ))}
+        </select>
+
+        <button class="toggle-btn" onclick="toggleMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+    </ul>
+</nav>
+
+<script is:client>
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectLang = document.getElementById('language-selector');
+  
+      if (selectLang) {
+        selectLang.addEventListener('change', (event) => {
+          const selectedLanguage = event.target.value;
+          const currentPath = window.location.pathname.split('/').slice(2).join('/');
+          const newPath = `/${selectedLanguage}/${currentPath}`; 
+          window.location.href = newPath;
+        });
+      }
+    });
+  </script>
+
+
+<style>
+
+  .select-lang {
+        background-color: transparent;
+        border: 2px solid transparent;
+        font-size: 3rem;
+        color: var(--primary-color);
+        appearance: none;
+    }
+
+    .material-icons{
+        color: var(--primary-color);
+    }
+
+    span:hover{
+        cursor: pointer;
+        color: #00ADB5;
+    }
+
+    .toggle-btn span{
+        font-size: 2rem;
+        color: var(--secondary-color);
+    }
+ 
+    nav{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background-color: var(--background-color);
+        color: var(--primary-color);
+        z-index: 1000;
+    }
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        list-style-type: none;
+        font-family: 'Roboto', sans-serif;
+
+    }
+
+    div span{
+        font-size: 3.5rem;
+    }
+
+    button{
+        background-color: var(--secondary-color);
+        color: var(--background-color);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+    }
+</style>

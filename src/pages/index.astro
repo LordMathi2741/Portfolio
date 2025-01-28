@@ -1,0 +1,46 @@
+---
+import DeveloperDescription from '../components/DeveloperDescription.astro';
+import NavBar from '../components/NavBar.astro';
+import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/util.ts';
+import Carrousel from '../components/Carrousel';
+import { certfieds } from '../assets/data/certifieds';
+import InfiniteCarrousel from '../components/InfiniteCarrousel';
+import Experience from '../components/Experience';
+import DataDetector from '../utils/data-detector';
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = useTranslations(lang);
+
+
+const worksData = DataDetector.detect(lang)["works"];
+const experiencesData = DataDetector.detect(lang)["experiences"];
+---
+
+<Layout>
+	<NavBar />
+	<hero class="flexible">
+		<div class="developer-card" aria-label="See my bio here">
+			<img src="/src/assets/lordmathi2741.jpeg" alt="LordMathi2741" width="300" />
+			<h1>{t('dev.name')}</h1>
+			<h2>{t('dev.title')}</h2>
+		</div>
+		<DeveloperDescription />
+	</hero>
+
+	<section id="work-section" class="section">
+		<h1>{t('works.title')}</h1>
+		<Carrousel items={worksData} client:load />
+	</section>
+
+	<section class="section" id="achievements-section">
+		<h1>{t('achievements.title')}</h1>
+		<InfiniteCarrousel items={certfieds} client:load />
+	</section>
+
+	<section id="experience-section" class="section">
+		<h1>{t('experience.title')}</h1>
+		<Experience data={experiencesData} />
+	</section>
+</Layout>
