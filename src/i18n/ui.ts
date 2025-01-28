@@ -20,6 +20,7 @@ export const ui = {
         "works.title": "My recent works",
         "achievements.title": "My certifications",
         "experience.title": "My experience",
+        "contact.title": "Contact me and let's work together",
     },
     es: {
         "nav.works": "Trabajos",
@@ -35,6 +36,7 @@ export const ui = {
         "works.title": "Mis trabajos recientes",
         "achievements.title": "Mis certificaciones",
         "experience.title": "Mi experiencia",
+        "contact.title": "Contáctame y trabajemos juntos",
     }
 
 }

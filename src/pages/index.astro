@@ -8,6 +8,7 @@ import { certfieds } from '../assets/data/certifieds';
 import InfiniteCarrousel from '../components/InfiniteCarrousel';
 import Experience from '../components/Experience';
 import DataDetector from '../utils/data-detector';
+import FormContact from '../components/FormContact.jsx';
 
 const lang = getLangFromUrl(Astro.url);
 
@@ -42,5 +43,9 @@ const experiencesData = DataDetector.detect(lang)["experiences"];
 	<section id="experience-section" class="section">
 		<h1>{t('experience.title')}</h1>
 		<Experience data={experiencesData} />
+	</section>
+	<section class="section">
+		<h1>{t('contact.title')}</h1>
+		<FormContact client:load />
 	</section>
 </Layout>
