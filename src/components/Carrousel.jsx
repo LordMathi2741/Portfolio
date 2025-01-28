@@ -41,7 +41,7 @@ export default function Carrusel({ items }) {
       <style jsx>{`
         .carrusel-container {
           width: 100%;
-          height: calc(100vh - 100px);
+          height: calc(110vh - 100px);
           max-width: 1400px;
           margin: auto;
           padding: 2rem 0;
@@ -126,6 +126,7 @@ export default function Carrusel({ items }) {
           .swiper-button-prev {
             transform: scale(0.6);
           }
+
 
 
           .slide {
