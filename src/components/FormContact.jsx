@@ -6,9 +6,17 @@ export function FromContact() {
     const [message, setMessage] = useState("");
     const [name, setName] = useState("");
 
-    function onSubmit(e) {
+    function clearForm() {
+        setEmail("");
+        setMessage("");
+        setName("");
+    }
+
+    async function onSubmit(e) {
         e.preventDefault();
-        GmailService.sendEmail(email, message, name);
+        await GmailService.sendEmail(email, message, name).then(() => {
+            clearForm();
+        });
     }
 
     return (
@@ -16,17 +24,20 @@ export function FromContact() {
            <input 
                     type="email" 
                     placeholder="Email" 
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)} 
                 />
             
             <input 
                     type="text" 
                     placeholder="Nombre" 
+                    value={name}
                     onChange={(e) => setName(e.target.value)} 
                 />
                 
             <textarea 
                 placeholder="Mensaje" 
+                value={message}
                 onChange={(e) => setMessage(e.target.value)} 
             />
             <button type="submit">Enviar</button> 
