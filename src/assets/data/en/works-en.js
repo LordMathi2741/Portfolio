@@ -32,7 +32,7 @@ export const worksEn = [
     {
         title: "Collaboration Application for Artists and Writers",
         description: "I developed a collaboration application for artists and artists and writers, and portfolio viewing. I used technologies such as Spring Boot, Angular, PayPal for payment management, and MySQL for data persistence. On the backend, the CQRS architecture was applied alongside the DDD approach to ensure the software’s scalability according to business needs. Similarly, on the frontend, a DDD approach was applied to guarantee the scalability of the web application.",
-        image: '/public/images/artcollab.png',
+        image: '/images/artcollab.png',
         url: 'https://github.com/orgs/Open-Source-SW54-Group-3-ArtCollab/repositories'
     }
 ];

@@ -26,13 +26,13 @@ export const works = [
     {
         title: "Plataforma de educación a distancia",
         description: "Desarrollé una plataforma educativa como parte de la EducHack 2024 auspiciada por la UPC, como parte de las funcionalidades más resaltantes se incluye la gestión de cursos para profesores, la creación de videoconferencias y la gestión de usuarios por parte de los administradores. Utilicé tecnologías como Next.js, NestJs, ImgUrl como servicio externo para manejar archivos, Dayli.co para la creación de videoconferencias, Paypal para la gestión de pagos y Postgres para la persistencia de datos. En el lado del backend se utilizó una arquitectura MVC para separar la persistencia de la lógica de negocio. Por motivos de confidencialidad por parte de la organizadora, no se puede mostrar un enlace al repositorio tampoco a la aplicación desplegada",
-        image: '/images/images/handin.jpeg',
+        image: '/images/handin.jpeg',
         url: 'https://github.com/LordMathi2741?tab=repositories'
     },
     {
         title: "Aplicación para colaboración entre Artistas y Escritores",
         description: "Desarrollé una aplicación para colaboración entre artistas y escritores como parte del curso de Desarrollo de Aplicaciones Open Source en la UPC. La aplicación incluye como funcionalidades más resaltantes la publicación de libros, interacción entre artistas y escritores y la visualización de portafolios. Utilicé tecnologías como Spring Boot, Angular, Paypal para la gestión de pagos y MYSQL para la persistencia de datos. En el lado del backend se aplicó la arquitectura de CQRS junto con el enfoque de DDD para asegurar la escalabilidad del software de acuerdo al negocio. En el frontend igualmente se aplicó un enfoque bajo DDD para garantizar la escalabilidad de la aplicación web",
-        image: '/images/images/artcollab.png',
+        image: '/images/artcollab.png',
         url: 'https://github.com/orgs/Open-Source-SW54-Group-3-ArtCollab/repositories'
     }
 ]
