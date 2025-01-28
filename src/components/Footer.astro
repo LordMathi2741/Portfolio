@@ -1,0 +1,86 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+
+<div>
+    <hr />
+    <footer class="footer-container">
+        <h1> {t('footer.title')}</h1>
+        <div class="footer-contact">
+            <h4>{t('footer.content.title')} </h4>
+            <h4> {t('footer.content.subtitle')}
+                <a href="https://github.com/LordMathi2741">
+                    Github
+                </a> o contactarme a través de 
+                <a href="https://www.linkedin.com/in/mathias-alejandro-jave-diaz-68a364222/">
+                    Linkedln
+                </a>
+            </h4>
+            <h4> &copy; 2024 Mathias Jave. {t('footer.copyrigth')}</h4>
+        </div>
+    </footer>
+</div>
+
+<style>
+
+    hr {
+        border: 0;
+        height: 1px;
+        background: #333;
+        background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+
+    .footer-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .footer-container h1 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        width: 20%;
+    }
+
+    .footer-contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        width: 50%;
+    }
+
+    .footer-contact h4 {
+        margin: 0.5rem;
+        font-family: 'Roboto', sans-serif;
+        color: var(--text-color);
+    }
+
+    .footer-contact a {
+        color: var(--warn-color);
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .footer-container {
+            flex-direction: column;
+        }
+
+        .footer-container h1 {
+            width: 100%;
+        }
+
+        .footer-contact {
+            width: 100%;
+        }
+    }
+
+</style>

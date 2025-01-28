@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GmailService } from "../service/gmail.service";
 
-export function FromContact() {
+export function FromContact({submitLabel, ...props}) {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [name, setName] = useState("");
@@ -23,24 +23,24 @@ export function FromContact() {
         <form onSubmit={onSubmit}>
            <input 
                     type="email" 
-                    placeholder="Email" 
+                    placeholder={props.emailPlaceholder}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)} 
                 />
             
             <input 
                     type="text" 
-                    placeholder="Nombre" 
+                    placeholder={props.namePlaceholder}
                     value={name}
                     onChange={(e) => setName(e.target.value)} 
                 />
                 
             <textarea 
-                placeholder="Mensaje" 
+                placeholder={props.messagePlaceholder}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)} 
             />
-            <button type="submit">Enviar</button> 
+            <button type="submit">{submitLabel}</button> 
         </form>
     );
 }

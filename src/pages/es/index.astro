@@ -9,6 +9,7 @@ import InfiniteCarrousel from '../../components/InfiniteCarrousel';
 import Experience from '../../components/Experience';
 import DataDetector from '../../utils/data-detector.ts';
 import FormContact from '../../components/FormContact';
+import Footer from '../../components/Footer.astro';
 
 
 const lang = getLangFromUrl(Astro.url);
@@ -34,7 +35,7 @@ const experiencesData = DataDetector.detect(lang)['experiences'];
 
 	<section id="work-section" class="section">
 		<h1>{t('works.title')}</h1>
-		<Carrousel items={worksData} client:load />
+		<Carrousel buttonLabel={t('works.button')} items={worksData} client:load />
 	</section>
 
 	<section class="section" id="achievements-section">
@@ -48,6 +49,9 @@ const experiencesData = DataDetector.detect(lang)['experiences'];
 	</section>
 	<section class="section">
 		<h1>{t('contact.title')}</h1>
-		<FormContact client:load />
+		<FormContact submitLabel={t('form.submit')} emailPlaceholder={t('form.email')} messagePlaceholder={t('form.message')} namePlaceholder={t('form.name')} client:load />
+	</section>
+	<section>
+		<Footer />
 	</section>
 </Layout>

@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination'; 
 import 'swiper/css/navigation';
 
-export default function Carrusel({ items }) {
+export default function Carrusel({ items, buttonLabel }) {
   return (
     <div
       className="carrusel-container"
@@ -31,7 +31,7 @@ export default function Carrusel({ items }) {
                   className="btn"
                   onClick={() => (window.location.href = item.url)}
                 >
-                  View Project
+                 {buttonLabel}
                 </button>
               </div>
             </div>
