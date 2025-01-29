@@ -1,18 +1,8 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 *{
     scroll-behavior: smooth;
 }
-@font-face {
-    font-family: 'Material Icons';
-    src: url('/assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
-         url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  .material-icons {
-    font-family: 'Material Icons', sans-serif;
-  }
   
 .section{
     padding: 50px;
