@@ -9,20 +9,20 @@ const t = useTranslations(lang);
     <ul>
         <div aria-label="My Works section">
             <a href="#work-section">
-            <span class="material-icons">
-                work
-            </span>
-            <div class="display">
-                <p>{t('nav.works')}</p>
-            </div>
+                <i class="material-icons">
+                    work
+                </i>
+                <div class="display">
+                    <p>{t('nav.works')}</p>
+                </div>
             </a>
         </div>
 
         <div aria-label="My Achievements section">
             <a href="#achievements-section">
-                <span class="material-icons">
+                <i class="material-icons">
                     school
-                </span>
+                </i>
                 <div class="display">
                     <p>{t('nav.achievements')}</p>
                 </div>
@@ -30,14 +30,14 @@ const t = useTranslations(lang);
         </div>
 
         <div aria-label="My experience section">
-           <a href="#experience-section">
-                <span class="material-icons">
+            <a href="#experience-section">
+                <i class="material-icons">
                     history
-                </span>
-                <div class="display" >
+                </i>
+                <div class="display">
                     <p>{t('nav.experience')}</p>
                 </div>
-           </a>
+            </a>
         </div>
 
         <button class="download-btn" id="download-btn">
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
         </select>
 
         <button class="toggle-btn" onclick="toggleMenu()">
-            <span class="material-icons">menu</span>
+            <i class="material-icons">menu</i>
         </button>
     </ul>
 </nav>
@@ -76,8 +76,7 @@ const t = useTranslations(lang);
         });
       }
     });
-  </script>
-
+</script>
 
 <style>
     a{
@@ -100,7 +99,8 @@ const t = useTranslations(lang);
             scale: 1.1;
         }
     }
-  .select-lang {
+
+    .select-lang {
         background-color: transparent;
         border: 2px solid transparent;
         font-size: 3rem;
@@ -112,12 +112,12 @@ const t = useTranslations(lang);
         color: var(--primary-color);
     }
 
-    span:hover{
+    i:hover{
         cursor: pointer;
         color: #00ADB5;
     }
 
-    .toggle-btn span{
+    .toggle-btn i{
         font-size: 2rem;
         color: var(--secondary-color);
     }
@@ -138,10 +138,9 @@ const t = useTranslations(lang);
         gap: 1rem;
         list-style-type: none;
         font-family: 'Roboto', sans-serif;
-
     }
 
-    div span{
+    div i{
         font-size: 3.5rem;
     }
 
@@ -171,6 +170,4 @@ const t = useTranslations(lang);
         }
 
     }
-
-
 </style>

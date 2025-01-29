@@ -1,30 +1,21 @@
----
-import SideBar from "./SideBar.astro";
-import languages from "../assets/data/languages.js";
-import { getLangFromUrl, useTranslations } from '../i18n/util.ts';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
----
-
 <nav>
     <ul>
         <div aria-label="My Works section">
             <a href="#work-section">
-            <span class="material-icons">
-                work
-            </span>
-            <div class="display">
-                <p>{t('nav.works')}</p>
-            </div>
+                <i class="material-icons">
+                    work
+                </i>
+                <div class="display">
+                    <p>{t('nav.works')}</p>
+                </div>
             </a>
         </div>
 
         <div aria-label="My Achievements section">
             <a href="#achievements-section">
-                <span class="material-icons">
+                <i class="material-icons">
                     school
-                </span>
+                </i>
                 <div class="display">
                     <p>{t('nav.achievements')}</p>
                 </div>
@@ -32,14 +23,14 @@ const t = useTranslations(lang);
         </div>
 
         <div aria-label="My experience section">
-           <a href="#experience-section">
-                <span class="material-icons">
+            <a href="#experience-section">
+                <i class="material-icons">
                     history
-                </span>
-                <div class="display" >
+                </i>
+                <div class="display">
                     <p>{t('nav.experience')}</p>
                 </div>
-           </a>
+            </a>
         </div>
 
         <button class="download-btn">
@@ -47,11 +38,10 @@ const t = useTranslations(lang);
         </button>
 
         <select class="select-lang" data-languages={JSON.stringify(languages)}>
-
         </select>
     </ul>
     <button class="toggle-btn" onclick="toggleMenu()">
-        <span class="material-icons">menu</span>
+        <i class="material-icons">menu</i>
     </button>
 </nav>
 
@@ -106,7 +96,6 @@ const t = useTranslations(lang);
     });
 </script>
 
-
 <style>
     .select-lang {
         background-color: transparent;
@@ -116,7 +105,7 @@ const t = useTranslations(lang);
         appearance: none;
     }
     
-    .download-btn{
+    .download-btn {
         background-color: var(--secondary-color);
         color: var(--primary-color);
         border: 1px solid var(--primary-color);
@@ -125,12 +114,14 @@ const t = useTranslations(lang);
         font-size: 1rem;
         cursor: pointer;
         transition: all 0.8s ease;
-        &:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            scale: 1.1;
-        }
     }
+
+    .download-btn:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        transform: scale(1.1);
+    }
+
     .sidebar-toggle {
         display: none;
     }
@@ -146,7 +137,7 @@ const t = useTranslations(lang);
         z-index: 99;
     }
 
-    p{
+    p {
         font-size: 1rem;
         margin-top: 20px;
     }
@@ -195,7 +186,7 @@ const t = useTranslations(lang);
         display: block;
     }
 
-    span:hover {
+    i:hover {
         cursor: pointer;
         color: #00ADB5;
     }
