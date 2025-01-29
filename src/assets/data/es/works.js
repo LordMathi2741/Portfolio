@@ -1,13 +1,13 @@
 export const works = [
     {
         title: 'Validación de reportes',
-        description: 'Desarrollé un sistema de validación de reportes de vehículos de transporte para la empresa HIPERFAST SAC, con funciones administrativas para gestionar el consumo de los clientes. El proyecto empleó tecnologías como C# junto con .Net, Vue.js y Node.js, con una base de datos MySQL para la persistencia de datos. Se implementó una arquitectura en capas basada en principios de Arquitectura Limpia, asegurando la mantenibilidad y escalabilidad del sistema.',
+        description: 'Desarrollé y mantuve un sistema de validación de certificados de conformidad para un organismo de inspección con acreditación ISO 17020 (OI - 044), con funciones administrativas para gestionar el consumo de los clientes. El proyecto empleó tecnologías como C# junto con .Net, Vue.js y Node.js, con una base de datos MySQL para la persistencia de datos. Se implementó una arquitectura en capas basada en principios de Arquitectura Limpia, asegurando la mantenibilidad y escalabilidad del sistema.',
         image: '/images/report-validation.png',
         url: 'http://38.25.38.94:5173/'
     },
     {
         title: 'Validación y control de facturas',
-        description: 'Desarrollé un sistema de validación y control de facturas para la empresa CORSERSAC SAC, con funcionalidades administrativas avanzadas para gestionar estados de facturas y analizar estadísticas de consumo mediante gráficos interactivos. El proyecto utilizó tecnologías como C# junto con .Net, Vue.js y Node.js, con una base de datos MySQL para la persistencia de datos. Se implementó una arquitectura en capas basada en principios de Arquitectura Limpia, lo que garantizó la mantenibilidad del sistema. Además, la portabilidad del software se logró mediante contenedores Docker, optimizando su despliegue y escalabilidad.',
+        description: 'Desarrollé un sistema de validación y control de facturas para un organismo de inspección con acreditación ISO 17020 (OI - 044), con funcionalidades administrativas avanzadas para gestionar estados de facturas y analizar estadísticas de consumo mediante gráficos interactivos. El proyecto utilizó tecnologías como C# junto con .Net, Vue.js y Node.js, con una base de datos MySQL para la persistencia de datos. Se implementó una arquitectura en capas basada en principios de Arquitectura Limpia, lo que garantizó la mantenibilidad del sistema. Además, la portabilidad del software se logró mediante contenedores Docker, optimizando su despliegue y escalabilidad.',
         image: '/images/invoice-validator.jpeg',
         url: 'https://github.com/Corsersac-Consultant-Platform'
     },
