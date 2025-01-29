@@ -31,6 +31,7 @@ export const ui = {
         "form.email": "Email",
         "form.message": "Subject",
         "form.submit": "Submit",
+        "download": "Download CV"
 
     },
     es: {
@@ -58,6 +59,7 @@ export const ui = {
         "form.email": "Correo",
         "form.message": "Asunto",
         "form.submit": "Enviar",
+        "download": "Descargar CV"
 
     }
 
