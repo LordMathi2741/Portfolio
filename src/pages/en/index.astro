@@ -1,15 +1,15 @@
 ---
-import DeveloperDescription from '../../components/DeveloperDescription.astro';
-import NavBar from '../../components/NavBar.astro';
-import Layout from '../../layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/util.ts';
-import Carrousel from '../../components/Carrousel';
-import { certfieds } from '../../assets/data/certifieds';
-import InfiniteCarrousel from '../../components/InfiniteCarrousel';
-import Experience from '../../components/Experience';
-import DataDetector from '../../utils/data-detector.ts';
-import FormContact from '../../components/FormContact';
-import Footer from '../../components/Footer.astro';
+
+import { certfieds } from "../../assets/data/certifieds";
+import Carrousel from "../../components/Carrousel";
+import DeveloperDescription from "../../components/DeveloperDescription.astro";
+import Experience from "../../components/Experience";
+import Footer from "../../components/Footer.astro";
+import FormContact from "../../components/FormContact";
+import NavBar from "../../components/NavBar.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/util";
+import Layout from "../../layouts/Layout.astro";
+import DataDetector from "../../utils/data-detector";
 
 
 const lang = getLangFromUrl(Astro.url);
@@ -24,34 +24,48 @@ const experiencesData = DataDetector.detect(lang)['experiences'];
 
 <Layout>
 	<NavBar />
-	<hero class="flexible">
-		<div class="developer-card" aria-label="See my bio here">
-			<img src="/images/lordmathi2741.jpeg" alt="LordMathi2741" width="300" />
-			<h1>{t('dev.name')}</h1>
-			<h2>{t('dev.title')}</h2>
-		</div>
-		<DeveloperDescription />
-	</hero>
+	<div class="main__container">
+		<hero class="developer__container">
+			<div class="developer__content" aria-label="Developer Information">
+				<img src="/images/lordmathi2741.jpeg" alt="LordMathi2741"/>
+				<div class="developer__details">
+					<h1>{t('dev.name')}</h1>
+					<h2>{t('dev.title')}</h2>
+				</div>
+			</div>
+			<DeveloperDescription />
+		</hero>
 
-	<section id="work-section" class="section">
-		<h1>{t('works.title')}</h1>
-		<Carrousel buttonLabel={t('works.button')} items={worksData} client:load />
-	</section>
-
-	<section class="section" id="achievements-section">
-		<h1>{t('achievements.title')}</h1>
-		<InfiniteCarrousel items={certfieds} client:load />
-	</section>
-
-	<section id="experience-section" class="section">
-		<h1>{t('experience.title')}</h1>
-		<Experience data={experiencesData} />
-	</section>
-	<section class="section">
-		<h1>{t('contact.title')}</h1>
-		<FormContact submitLabel={t('form.submit')} emailPlaceholder={t('form.email')} messagePlaceholder={t('form.message')} namePlaceholder={t('form.name')} client:load />
-	</section>
-	<section>
-		<Footer />
-	</section>
+		<section id="work-section">
+			<h1>{t('works.title')}</h1>
+			<Carrousel buttonLabel={t('works.button')} items={worksData} client:load />
+		</section>
+		<section id="experience-section">
+			<h1>{t('experience.title')}</h1>
+			<Experience data={experiencesData} />
+		</section>
+		<section id="achievements-section">
+			<div>
+				<h1>{t('achievements.title')}</h1>
+				{certfieds.map((item, index) => (
+					<div key={index} class="certification__content">
+						<div class="certification__details">
+							<h4>{item.title}</h4>
+							<p>{item.description}</p>
+						</div>
+						<a href={item.url} target="_blank" rel="noopener noreferrer">
+							<span class="material-icons">arrow_outward</span>
+						</a>
+					</div>
+				))}
+			</div>
+		</section>
+		<section style="width: 100%">
+			<h1>{t('contact.title')}</h1>
+			<FormContact submitLabel={t('form.submit')} emailPlaceholder={t('form.email')} messagePlaceholder={t('form.message')} namePlaceholder={t('form.name')} client:load />
+		</section>
+		<section>
+			<Footer />
+		</section>
+	</div>
 </Layout>

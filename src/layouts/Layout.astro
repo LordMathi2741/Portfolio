@@ -9,6 +9,9 @@ import '/src/assets/styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="stylesheet" href="/src/assets/styles/global.css" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
 		<title>Mathias Jave</title>
 	</head>
@@ -24,26 +27,49 @@ import '/src/assets/styles/global.css';
 		box-sizing: border-box;
 	}
 
-	:root{
-		--primary-color: white;
-		--secondary-color: #393E46;
-		--warn-color: #00ADB5;
-		--background-color: rgb(29, 28, 28);
-		--text-color: #707071;
+	:root {
+		/* Neutros - Dark Mode */
+		--color-primary: #0A2540;      /* Azul marino oscuro */
+		--color-bg: #0F172A;           /* Fondo principal oscuro */
+		--color-text: #F1F5F9;         /* Texto principal claro */
+		--color-text-secondary: #94A3B8;
+		--color-border: #334155;
+		--color-surface: #1E293B;      /* Cards */
+
+		/* Acento — opción A (Tech/Cyan) */
+		--color-accent: #0EA5E9;
+		--color-accent-hover: #0284C7;
+		--color-accent-bg: rgba(14, 165, 233, 0.1);
+
+		/* Tipografía */
+		--font-heading: 'Inter', 'Sora', sans-serif;
+		--font-body: 'Inter', sans-serif;
+
+		/* Radios y sombras */
+		--radius-button: 8px;
+		--radius-card: 8px;
+		--radius-badge: 6px;
+		--shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+		--shadow-card-hover: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 		--breakpoint-mobile: 480px;
 		--breakpoint-tablet: 768px;
 		--breakpoint-laptop: 1024px;
 		--breakpoint-desktop: 1366px;
 		--breakpoint-ultrawide: 2560px;
-    }
+	}
 
-	
-
-	
 	body{
-		background-color: var(--background-color);
+		background-color: var(--color-bg);
+		color: var(--color-text);
+		font-family: var(--font-body);
 		width: 100%;
-		height: 100vh;
+		min-height: 100vh;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-heading);
+		color: var(--color-primary);
 	}
 
 </style>

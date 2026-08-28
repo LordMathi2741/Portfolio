@@ -6,6 +6,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export default function Carrusel({ items, buttonLabel }) {
+  const maxSlidesPerView = 4;
+  const shouldLoop = items.length > maxSlidesPerView;
   return (
     <div
       className="carrusel-container"
@@ -14,25 +16,52 @@ export default function Carrusel({ items, buttonLabel }) {
         modules={[Autoplay, Pagination, Navigation]}
         spaceBetween={30}
         slidesPerView={1}
-        speed={2000}
-        allowTouchMove={false}
-        autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-        loop={true}
+        initialSlide={0}
+        pagination={{ clickable: true }}
+        speed={1500}
+        allowTouchMove={true}
+        autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         navigation
+        loop={shouldLoop}
+        breakpoints={{
+          768: { 
+            slidesPerView: Math.min(2, items.length), 
+            spaceBetween: 20 
+          },
+          1024: { 
+            slidesPerView: Math.min(3, items.length), 
+            spaceBetween: 30 
+          },
+          1400: { 
+            slidesPerView: Math.min(4, items.length), 
+            spaceBetween: 40 
+          },
+        }}
       >
         {items.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="slide">
-              <img src={item.image} alt={item.title} className="slide-image" width={100} height={100} />
+            <div className="slide card">
+              <div className="image-wrapper">
+                  <img src={item.image} alt={item.title} className="slide-image" />
+              </div>
               <div className="work-content">
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-                <button
-                  className="btn"
-                  onClick={() => (window.location.href = item.url)}
-                >
-                 {buttonLabel}
-                </button>
+                {item.badges && item.badges.length > 0 && (
+                  <div className="badges-container">
+                    {item.badges.map((badge, idx) => (
+                      <span key={idx} className="badge">{badge}</span>
+                    ))}
+                  </div>
+                )}
+                <div className="button-container">
+                    <button
+                      className="btn"
+                      onClick={() => (window.location.href = item.url)}
+                    >
+                    {buttonLabel}
+                    </button>
+                </div>
               </div>
             </div>
           </SwiperSlide>
@@ -41,8 +70,7 @@ export default function Carrusel({ items, buttonLabel }) {
       <style jsx>{`
         .carrusel-container {
           width: 100%;
-          height: calc(110vh - 100px);
-          max-width: 1400px;
+          max-width: 1800px;
           margin: auto;
           padding: 2rem 0;
         }
@@ -50,101 +78,94 @@ export default function Carrusel({ items, buttonLabel }) {
         .slide {
           display: flex;
           flex-direction: column;
-          padding-left: 6rem;
-          padding-right: 6rem;
+          height: 100%;
+          width: 100%;
+          background-color: var(--color-surface);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-card);
+          box-shadow: var(--shadow-card);
+          overflow: hidden;
+          transition: box-shadow 0.2s, transform 0.3s ease;
         }
 
         .slide:hover {
-          cursor: pointer;
-          transform: scale(1.02);
-          transition: transform 0.3s ease;
+          box-shadow: var(--shadow-card-hover);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--color-border);
         }
 
         .slide-image {
           width: 100%;
-          max-width: 100%;
-          height: auto;
+          height: 100%;
           object-fit: cover;
-          border-radius: 5px;
-          margin-bottom: 1rem;
         }
 
         .work-content {
-          padding: 0.5rem;
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
         }
 
         h3 {
-          margin: 0;
-          color: var(--warn-color);
-          font-family: 'Roboto', sans-serif;
-          font-size: 1.5rem;
+          margin: 0 0 0.5rem 0;
+          color: var(--color-primary);
+          font-family: var(--font-heading);
+          font-size: 1.25rem;
+          font-weight: 700;
         }
 
         p {
-          color: var(--primary-color);
-          font-family: 'Roboto', sans-serif;
-          font-size: 1.5rem;
-          margin: 0.5rem 0 1.5rem;
+          color: var(--color-text-secondary);
+          font-family: var(--font-body);
+          font-size: 0.95rem;
+          line-height: 1.5;
+          margin: 0 0 1rem 0;
+          flex-grow: 1;
+        }
+
+        .badges-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .badge {
+          background-color: var(--color-accent-bg);
+          color: var(--color-accent);
+          border-radius: var(--radius-badge);
+          padding: 4px 10px;
+          font-size: 12px;
+          font-weight: 600;
+          font-family: var(--font-body);
+        }
+
+        .button-container {
+          margin-top: auto;
         }
 
         .btn {
-          background-color: var(--warn-color);
-          color: var(--primary-color);
-          padding: 0.4rem 1rem;
+          background-color: var(--color-accent);
+          color: white;
+          padding: 0.6rem 1.2rem;
           border: none;
-          border-radius: 5px;
+          border-radius: var(--radius-button);
           cursor: pointer;
           font-size: 0.9rem;
-          transition: background-color 0.3s ease;
-          margin: 0 0.5rem;
+          font-weight: 600;
+          font-family: var(--font-body);
+          transition: background-color 0.2s;
+          width: 100%;
         }
-
-        .swiper-pagination-bullet {
-          background-color: var(--primary-color);
-          opacity: 0.6;
-          transition: opacity 0.3s ease;
-        }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: var(--primary-color);
-          opacity: 0.8;
-          transition: opacity 0.3s ease;
-        }
-
-        .swiper-button-next:hover,
-        .swiper-button-prev:hover {
-          opacity: 1;
-        }
-
-        .swiper-pagination-bullet-active {
-          opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-          .swiper-button-next,
-          .swiper-button-prev {
-            transform: scale(0.6);
-          }
-
-
-
-          .slide {
-            padding-left: 3rem;
-            padding-right: 3rem;
-          }
-
-          .slide-image {
-            max-height: 200px;
-          }
-
-          h3 {
-            font-size: 1rem;
-          }
-
-          p {
-            font-size: 0.9rem;
-          }
+        
+        .btn:hover {
+            background-color: var(--color-accent-hover);
         }
       `}</style>
     </div>

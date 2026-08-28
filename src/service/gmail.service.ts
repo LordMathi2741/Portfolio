@@ -2,8 +2,8 @@ import emailjs from 'emailjs-com';
 
 export class GmailService {
     static async sendEmail(email: string, message: string, name: string) {
-        const publicKey = "JCSXbnuMCT-chZu9U"; 
-        const serviceId = "service_h3ntc7f"; 
+        const publicKey = "VScSz3okkHPhvuhgm"; 
+        const serviceId = "service_6cdb9s1"; 
         const templateId = "template_6bgktpl"; 
 
         const params = {
@@ -17,7 +17,7 @@ export class GmailService {
             if (response.status === 200) {
                 alert('Correo enviado con éxito');
             } else {
-                alert('Error al enviar el correo');
+                alert('Ocurrió un error al enviar el correo');
             }
         } catch (error) {
             console.error('Error:', error);

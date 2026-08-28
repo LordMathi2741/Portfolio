@@ -53,7 +53,7 @@ const t = useTranslations(lang);
         </select>
 
         <button class="toggle-btn" onclick="toggleMenu()">
-            <i class="material-icons">menu</i>
+            <i style="font-size: 2rem; color: white;" class="material-icons">menu</i>
         </button>
     </ul>
 </nav>
@@ -83,43 +83,41 @@ const t = useTranslations(lang);
         text-decoration: none;
     }
 
-    .download-btn{
-        background-color: var(--secondary-color);
-        color: var(--primary-color);
-        border: 1px solid var(--primary-color);
-        padding: 10px;
-        border-radius: 25px;
-        width: 200px;
+     .download-btn {
+        background-color: var(--color-accent);
+        color: var(--color-text);
+        border: 2px solid var(--color-accent);
+        border-radius: var(--radius-button);
+        padding: 0.5rem 1rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-family: var(--font-body);
         font-size: 1rem;
+        font-weight: 600;
+        font-family: var(--font-body);
         cursor: pointer;
-        transition: all 0.8s ease;
-        &:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            scale: 1.1;
-        }
+        transition: all 0.2s ease;
+    }
+
+    .download-btn:hover {
+        background-color: var(--color-accent-hover);
     }
 
     .select-lang {
         background-color: transparent;
         border: 2px solid transparent;
         font-size: 3rem;
-        color: var(--primary-color);
+        color: var(--color-text);
         appearance: none;
     }
 
     .material-icons{
-        color: var(--primary-color);
+        color: var(--color-accent);
     }
 
     i:hover{
         cursor: pointer;
         color: #00ADB5;
-    }
-
-    .toggle-btn i{
-        font-size: 2rem;
-        color: var(--secondary-color);
     }
  
     nav{
@@ -128,8 +126,8 @@ const t = useTranslations(lang);
         left: 0;
         width: 50%;
         height: 100%;
-        background-color: var(--background-color);
-        color: var(--primary-color);
+        background-color: var(--color-bg);
+        color: var(--color-text);
         z-index: 1000;
     }
     ul {
@@ -144,9 +142,9 @@ const t = useTranslations(lang);
         font-size: 3.5rem;
     }
 
+
     .toggle-btn {
-        background-color: var(--secondary-color);
-        color: var(--background-color);
+        color: var(--color-text);
         border: none;
         border-radius: 50%;
         width: 50px;
@@ -154,18 +152,18 @@ const t = useTranslations(lang);
         position: absolute;
         bottom: 20px;
         right: 20px;
-        background-color: var(--primary-color);
+        background-color: var(--color-accent);
     }
 
    @media (max-width: 768px) {
        .download-btn{
-           width: 150px;
+           width: 200px;
        }
     }
 
     @media (max-width: 480px) {
         .download-btn{
-            width: 120px;
+            width: 150px;
             font-size: 0.8rem;
         }
 

@@ -1,22 +1,11 @@
 ---
-import stats from '../assets/data/stats.js';
 import { getLangFromUrl, useTranslations } from '../i18n/util';
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang);
 ---
 <div class="developer-bio">
-        <h1 class="auto-type"> {t('dev.presentation')}</h1>
-        <h2>{t('dev.myself')} </h2>
-        <div class="stats-content" data-stats={JSON.stringify(stats)}>
-            {
-                stats.map(stat => (
-                    <div class="stat">
-                        <h3 style="font-size: 2rem; color: var(--warn-color); font-weight:bold;">{t(stat.title)}</h3>
-                        <p style="font-size: 1.8rem; color: var(--primary-color);">{stat.value}</p>
-                    </div>
-                ))
-            }
-        </div>
+    <h1 class="auto-type"> {t('dev.presentation')}</h1>
+    <h2>{t('dev.myself')} </h2>
  </div>
 
 
@@ -53,15 +42,6 @@ const t = useTranslations(lang);
         animation: autoType 6s steps(40, end) infinite, blink 0.6s step-end infinite;
     }
 
-    .stats-content {
-        display: flex;
-        gap: 1rem;
-        text-align: center;
-        animation: fade-in-up 1s;
-    }
-
-
-
     @keyframes blink {
         from, to {
             border-color: transparent;
@@ -70,70 +50,71 @@ const t = useTranslations(lang);
             border-color: #eeeeee;
         }
     }
-
+  
     .developer-bio {
-        width: 50%;
         letter-spacing: 0.8px;
         font-family: 'Roboto', sans-serif;
         text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: end;
+        width: 50%;
+    }
+
+    h1,h2 {
+        font-size: 3rem;
+        font-weight: semi-bold;
     }
 
     h1 {
-        font-size: 3.5rem;
-        font-weight: 700;
         color: #eeeeee;
     }
 
     h2 {
-        font-size: 3.5rem;
-        font-weight: semi-bold;
         color: #393E46;
     }
 
     @media (max-width: 1366px){
-        .stats-content {
-            flex-direction: column;
-        }
-
-        .developer-bio{
-            margin-top: 100px;
-        }
-
-        .developer-bio {
+         .developer-bio {
+            justify-content: start;
+            align-items: start;
             width: 100%;
         }
 
-        
-    }
-
-    @media (max-width: 768px) {
+        h2 {
+            font-size: 2.5rem;
+        }
 
         h1 {
             font-size: 2.5rem;
         }
+        
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
 
         h2{
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
 
 
     }
 
     @media (max-width: 425px) {
-        .developer-bio {
-            width: 100%;
-        }
-
         .developer-card{
             width: 50%;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         h2{
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 

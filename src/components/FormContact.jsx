@@ -14,6 +14,10 @@ export function FromContact({submitLabel, ...props}) {
 
     async function onSubmit(e) {
         e.preventDefault();
+        if (!email || !message || !name) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
         await GmailService.sendEmail(email, message, name).then(() => {
             clearForm();
         });
