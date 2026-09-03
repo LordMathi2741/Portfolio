@@ -64,7 +64,8 @@ const t = useTranslations(lang);
       const downloadBn = document.getElementById('download-btn');
 
       downloadBn.addEventListener('click', () => {
-       window.open("https://drive.google.com/file/d/17Q35zvaI7qt7f_pU0CbhCiB7-NtYhikV/view?usp=sharing", "_blank");
+        window.location.href = "https://drive.google.com/file/d/17Q35zvaI7qt7f_pU0CbhCiB7-NtYhikV/view?usp=sharing";
+    });
   
       if (selectLang) {
         selectLang.addEventListener('change', (event) => {
