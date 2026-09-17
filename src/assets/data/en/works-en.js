@@ -1,7 +1,7 @@
 export const worksEn = [
     {
-        title: 'ScamShield — Scam Estimation in Digital Purchases',
-        description: 'Web application with Machine Learning (Random Forest) and NLP (DistilBERT fine-tuning) to mitigate fraud risk in digital transactions, specifically trained for the Peruvian context.',
+        title: 'ScamShield — A browser extension designed to reduce the risk of scams when making online purchases',
+        description: 'A browser extension that uses Machine Learning and Natural Language Processing techniques to reduce the risk of scams in online purchases, applying the DistilBERT model (fine-tuned) for detecting fraudulent reviews and Random Forest for classifying the level of risk probability.',
         badges: ['.NET Core', 'Next.js', 'Machine Learning', 'NLP', 'Python'],
         image: '/images/scamshield.png',
         url: 'https://scamshield.ryzeon.dev/'

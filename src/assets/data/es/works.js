@@ -1,7 +1,7 @@
 export const works = [
     {
-        title: 'ScamShield — Estimación de estafas en compras digitales',
-        description: 'Aplicación web con Machine Learning (Random Forest) y NLP (fine-tuning de DistilBERT) para mitigar el riesgo de fraude en transacciones digitales, entrenado específicamente para el contexto peruano.',
+        title: 'ScamShield — Extensión de navegador para mitigar la probabilidad de riesgo de estafas en compras digitales',
+        description: 'Extensión de navegador que utiliza técnicas de Machine Learning y Procesamiento de Lenguaje Natural para mitigar la probabilidad de riesgo de estafa en compras digitales, aplicando el modelo DistilBERT (fine-tuned) para la detección de reseñas fraudulentas y Random Forest para clasificación de nivel de probabilidad de riesgo.',
         badges: ['.NET Core', 'Next.js', 'Machine Learning', 'NLP', 'Python'],
         image: '/images/scamshield.png',
         url: 'https://scamshield.ryzeon.dev/'
