@@ -111,13 +111,13 @@ const t = useTranslations(lang);
         background-color: transparent;
         border: 2px solid transparent;
         font-size: 2rem;
-        color: #fff;
+        color: var(--color-text);
         appearance: none;
     }
     
     .download-btn {
         background-color: var(--color-accent);
-        color: var(--color-text);
+        color: white;
         border: 2px solid var(--color-accent);
         border-radius: var(--radius-button);
         padding: 0.5rem 1rem;
@@ -156,8 +156,8 @@ const t = useTranslations(lang);
     }
 
     nav {
-        background-color: var(--color-primary);
-        color: white;
+        background-color: var(--color-surface);
+        color: var(--color-text);
         padding: 30px;
         border-radius: 0;
         position: fixed;
@@ -166,7 +166,8 @@ const t = useTranslations(lang);
         left: 0;
         right: 0;
         z-index: 100;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        border-bottom: 1px solid var(--color-border);
     }
 
     ul {
@@ -188,7 +189,7 @@ const t = useTranslations(lang);
 
     .material-icons {
         font-size: 2rem;
-        color: white;
+        color: var(--color-text);
         transition: color 0.2s;
     }
 
@@ -238,13 +239,17 @@ const t = useTranslations(lang);
 
         .toggle-btn {
             display: block;
-            color: var(--color-text);
+            color: white;
             background-color: var(--color-accent);
             border: none;
             border-radius: 50%;
             width: 50px;
             height: 45px;
             margin-right: 30px;
+        }
+
+        .toggle-btn .material-icons {
+            color: white;
         }
     
 

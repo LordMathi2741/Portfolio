@@ -14,6 +14,23 @@ import '/src/assets/styles/global.css';
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
 		<title>Mathias Jave</title>
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'light') {
+				document.documentElement.removeAttribute('data-theme');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
 	</head>
 	<body>
 		<slot />
@@ -28,13 +45,13 @@ import '/src/assets/styles/global.css';
 	}
 
 	:root {
-		/* Neutros - Dark Mode */
+		/* Neutros - Light Mode (Base) */
 		--color-primary: #0A2540;      /* Azul marino oscuro */
-		--color-bg: #0F172A;           /* Fondo principal oscuro */
-		--color-text: #F1F5F9;         /* Texto principal claro */
-		--color-text-secondary: #94A3B8;
-		--color-border: #334155;
-		--color-surface: #1E293B;      /* Cards */
+		--color-bg: #F7F9FC;           /* Fondo principal */
+		--color-text: #1C1E21;         /* Texto principal */
+		--color-text-secondary: #6B7280;
+		--color-border: #E5E7EB;
+		--color-surface: #FFFFFF;      /* Cards */
 
 		/* Acento — opción A (Tech/Cyan) */
 		--color-accent: #0EA5E9;
@@ -57,6 +74,15 @@ import '/src/assets/styles/global.css';
 		--breakpoint-laptop: 1024px;
 		--breakpoint-desktop: 1366px;
 		--breakpoint-ultrawide: 2560px;
+	}
+
+	[data-theme="dark"] {
+		--color-primary: #F1F5F9;
+		--color-bg: #0F172A;
+		--color-text: #F1F5F9;
+		--color-text-secondary: #94A3B8;
+		--color-surface: #1E293B;
+		--color-border: #334155;
 	}
 
 	body{

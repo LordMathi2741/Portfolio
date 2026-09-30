@@ -6,8 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export default function Carrusel({ items, buttonLabel }) {
-  const maxSlidesPerView = 4;
-  const shouldLoop = items.length > maxSlidesPerView;
+  const shouldLoop = items.length > 1;
   return (
     <div
       className="carrusel-container"
@@ -18,7 +17,7 @@ export default function Carrusel({ items, buttonLabel }) {
         slidesPerView={1}
         initialSlide={0}
         pagination={{ clickable: true }}
-        speed={1500}
+        speed={500}
         allowTouchMove={true}
         autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         navigation
