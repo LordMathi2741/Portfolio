@@ -2,6 +2,7 @@
 
 import DeveloperDescription from '../.../../components/DeveloperDescription.astro';
 import { certfieds } from '../assets/data/certifieds';
+import CertificationGallery from '../components/CertificationGallery';
 import Carrousel from '../components/Carrousel';
 import Experience from '../components/Experience';
 import Footer from '../components/Footer.astro';
@@ -61,17 +62,7 @@ const experiencesData = DataDetector.detect(lang)['experiences'];
 		<section id="achievements-section">
 			<div>
 				<h1>{t('achievements.title')}</h1>
-				{certfieds.map((item, index) => (
-					<div key={index} class="certification__content">
-						<div class="certification__details">
-							<h4>{item.title}</h4>
-							<p>{item.description}</p>
-						</div>
-						<a href={item.url} target="_blank" rel="noopener noreferrer">
-							<span class="material-icons">arrow_outward</span>
-						</a>
-					</div>
-				))}
+				<CertificationGallery items={certfieds} client:load />
 			</div>
 		</section>
 		<section id="contact-section" style="width: 100%">
