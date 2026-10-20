@@ -33,10 +33,15 @@ export default function CertificationGallery({ items }) {
           type="button"
           className="cert-thumb"
           onClick={() => setActive(index)}
-          aria-label={item.title}
         >
-          <img src={item.image} alt={item.title} loading="lazy" />
-          <span className="material-icons cert-zoom" aria-hidden="true">zoom_in</span>
+          <span className="cert-image">
+            <img src={item.image} alt={item.title} loading="lazy" />
+            <span className="material-icons cert-zoom" aria-hidden="true">zoom_in</span>
+          </span>
+          <span className="cert-caption">
+            <span className="cert-title">{item.title}</span>
+            {item.issuer && <span className="cert-issuer">{item.issuer}</span>}
+          </span>
         </button>
       ))}
 
@@ -83,9 +88,10 @@ export default function CertificationGallery({ items }) {
         }
 
         .cert-thumb {
-          position: relative;
-          aspect-ratio: 4 / 3;
+          display: flex;
+          flex-direction: column;
           padding: 0;
+          text-align: left;
           border: 1px solid var(--color-border);
           border-radius: var(--radius-card);
           background-color: var(--color-surface);
@@ -95,11 +101,41 @@ export default function CertificationGallery({ items }) {
           transition: box-shadow 0.2s, transform 0.3s ease;
         }
 
-        .cert-thumb img {
+        .cert-image {
+          position: relative;
+          display: block;
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          overflow: hidden;
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .cert-image img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
+        }
+
+        .cert-caption {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding: 1rem 1.25rem;
+          flex-grow: 1;
+        }
+
+        .cert-title {
+          color: var(--color-primary);
+          font-family: var(--font-heading);
+          font-size: 1.05rem;
+          font-weight: 700;
+        }
+
+        .cert-issuer {
+          color: var(--color-text-secondary);
+          font-family: var(--font-body);
+          font-size: 0.9rem;
         }
 
         .cert-zoom {
