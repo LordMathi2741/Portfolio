@@ -13,7 +13,7 @@ export const worksEn = [
         description: 'Donation platform with online payments through Niubiz, donation certificates stored in Azure Blob Storage, an admin dashboard with Azure AD authentication, email delivery via Microsoft Graph and reCAPTCHA.',
         badges: ['ASP.NET Core 8', 'Clean Architecture', 'Next.js', 'Oracle', 'Niubiz', 'Azure', 'xUnit'],
         image: '/images/udep-donaciones.jpg',
-        url: 'https://udep-donaciones-dev.cloudapp.pe/'
+        url: 'https://fondoimpacto-donaciones.udep.edu.pe/'
     },
     {
         context: 'Real client · YAVA S.A.C.',
