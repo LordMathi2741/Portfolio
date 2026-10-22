@@ -1,0 +1,144 @@
+---
+import { awards } from "../assets/data/awards";
+import { certfieds } from "../assets/data/certifieds";
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+import CertificationGallery from "./CertificationGallery";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Los ítems sin imagen no entran en la galería: se listan como texto para no perderlos
+const certsPending = certfieds.filter((item) => !item.image);
+const awardItems = awards.map((award) => ({ image: award.image, title: award[lang].title, issuer: award[lang].detail }));
+const awardsPending = awardItems.filter((item) => !item.image);
+---
+
+<section id="training-section" aria-labelledby="training-title">
+    <div class="section-header">
+        <span class="eyebrow">05 / {t('nav.training')}</span>
+        <h2 id="training-title">{t('training.title')}</h2>
+        <p>{t('training.subtitle')}</p>
+    </div>
+
+    <article class="card education">
+        <span class="material-icons" aria-hidden="true">school</span>
+        <div>
+            <h3>{t('education.degree')}</h3>
+            <p>{t('education.school')} · Lima</p>
+            <p class="muted">{t('education.status')}</p>
+            <dl>
+                <dt>{t('education.thesis.label')}</dt>
+                <dd>{t('education.thesis')}</dd>
+                <dt>{t('education.publication.label')}</dt>
+                <dd>{t('education.publication')}</dd>
+            </dl>
+        </div>
+    </article>
+
+    <h3 class="subheading">{t('training.certifications')}</h3>
+    <CertificationGallery items={certfieds} verifyLabel={t('training.verify')} client:visible />
+    {certsPending.length > 0 && (
+        <ul class="pending">
+            {certsPending.map((item) => (
+                <li>
+                    <strong>{item.title}</strong>
+                    <span>{[item.issuer, item.date].filter(Boolean).join(' · ')}</span>
+                    {item.credentialId && <span class="mono">ID: {item.credentialId}</span>}
+                </li>
+            ))}
+        </ul>
+    )}
+
+    <h3 class="subheading">{t('training.awards')}</h3>
+    <CertificationGallery items={awardItems} client:visible />
+    {awardsPending.length > 0 && (
+        <ul class="pending">
+            {awardsPending.map((item) => (
+                <li>
+                    <strong>{item.title}</strong>
+                    <span>{item.issuer}</span>
+                </li>
+            ))}
+        </ul>
+    )}
+</section>
+
+<style>
+    .education {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .education .material-icons {
+        color: var(--color-accent);
+        font-size: 2rem;
+    }
+
+    h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.15rem;
+    }
+
+    .education p {
+        margin: 0;
+    }
+
+    .muted {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+    }
+
+    dl {
+        margin: 1rem 0 0;
+        max-width: 80ch;
+    }
+
+    dt {
+        color: var(--color-primary);
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    dd {
+        margin: 0.15rem 0 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .subheading {
+        margin-top: 2.5rem;
+    }
+
+    .pending {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 0.75rem 1.5rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .pending li {
+        display: flex;
+        flex-direction: column;
+        padding-left: 1rem;
+        border-left: 3px solid var(--color-accent);
+    }
+
+    .pending strong {
+        color: var(--color-primary);
+    }
+
+    .pending span {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.8rem !important;
+    }
+</style>

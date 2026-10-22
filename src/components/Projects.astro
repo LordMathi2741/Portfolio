@@ -1,0 +1,147 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+
+const { data } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="work-section" aria-labelledby="works-title">
+    <div class="section-header">
+        <span class="eyebrow">03 / {t('nav.works')}</span>
+        <h2 id="works-title">{t('works.title')}</h2>
+        <p>{t('works.subtitle')}</p>
+    </div>
+
+    <ul class="projects">
+        {data.map((item) => (
+            <li class="card project">
+                <div class="project-image">
+                    <img src={item.image} alt={item.title} loading="lazy" />
+                    {item.context && <span class="project-context">{item.context}</span>}
+                </div>
+                <div class="project-body">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <ul class="badges">
+                        {item.badges.map((badge) => <li class="badge">{badge}</li>)}
+                    </ul>
+                    {item.url && item.url !== '#' && (
+                        <a class="project-link" href={item.url} target="_blank" rel="noopener">
+                            {t('works.button')}
+                            <span class="material-icons" aria-hidden="true">arrow_outward</span>
+                        </a>
+                    )}
+                </div>
+            </li>
+        ))}
+    </ul>
+</section>
+
+<style>
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .project {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transition: box-shadow 0.2s;
+    }
+
+    .project:hover {
+        box-shadow: var(--shadow-card-hover);
+    }
+
+
+    .project-image {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border-bottom: 1px solid var(--color-border);
+        background-color: var(--color-bg);
+    }
+
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .project-context {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 4px 10px;
+        border-radius: var(--radius-badge);
+        background-color: var(--color-primary);
+        color: var(--color-bg);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .project-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 50%;
+        gap: 0.75rem;
+        padding: 1.5rem;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        line-height: 1.35;
+    }
+
+    .project-body p {
+        margin: 0;
+        flex-grow: 1;
+        color: var(--color-text-secondary);
+        font-size: 0.95rem;
+    }
+
+    .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        align-self: flex-start;
+        min-height: 44px;
+        color: var(--color-accent-strong);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .project-link:hover {
+        text-decoration: underline;
+    }
+
+    :global([data-theme="dark"]) .project-link {
+        color: var(--color-accent);
+    }
+
+    .project-link .material-icons {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 1024px) {
+        .projects {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 640px) {
+        .projects {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

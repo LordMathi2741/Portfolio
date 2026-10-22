@@ -134,9 +134,9 @@ Aplicación móvil para el control de asistencia mediante reconocimiento facial.
 **Enlace:** [Demo](https://scamshield.ryzeon.dev/)
 
 **Descripción:**
-Aplicación web con bibliotecas de Inteligencia Artificial para mitigar el riesgo de estafa en compras digitales. Combina dos componentes de IA: un modelo de clasificación entrenado con Random Forest (Scikit-Learn) y un modelo de lenguaje re-entrenado mediante fine-tuning (DistilBERT, usando la biblioteca Transformers), enfocado específicamente en la detección de reseñas fraudulentas dentro del contexto peruano.
+Aplicación web con bibliotecas de Inteligencia Artificial para mitigar el riesgo de estafa en compras digitales. Combina dos componentes de IA: un modelo de clasificación entrenado con Machine Learning (Scikit-Learn) y un modelo de lenguaje re-entrenado mediante fine-tuning (DistilBERT, usando la biblioteca Transformers), enfocado específicamente en la detección de reseñas fraudulentas dentro del contexto peruano.
 
-**Stack:** .NET Core (backend), Next.js (frontend), Machine Learning: Random Forest con Scikit-Learn (clasificación); Fine-Tuning: DistilBERT con Transformers (detección de reseñas fraudulentas)
+**Stack:** .NET Core (backend), Next.js (frontend), Machine Learning: Machine Learning con Scikit-Learn (clasificación); Fine-Tuning: DistilBERT con Transformers (detección de reseñas fraudulentas)
 **Arquitectura:** Aplicación web full-stack con capa de Machine Learning integrada para el análisis de riesgo de fraude
 **Nota:** Es el proyecto más alineado a un contexto financiero/bancario de todo el portafolio — detección de fraude es un caso de uso directo en banca. Es también el proyecto con mayor profundidad técnica en IA/ML (entrenamiento y fine-tuning de modelos, no solo consumo de APIs externas). Faltan detalles adicionales (funcionalidades específicas de la app, arquitectura detallada, fecha) — completar cuando el candidato los proporcione, sin inventarlos mientras tanto.
 

@@ -1,0 +1,99 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const stats = [
+    { value: t('about.stat.experience'), label: t('about.stat.experience.label') },
+    { value: t('about.stat.stack'), label: t('about.stat.stack.label') },
+    { value: t('about.stat.client'), label: t('about.stat.client.label') },
+    { value: t('about.stat.education'), label: t('about.stat.education.label') },
+];
+---
+
+<section id="about-section" aria-labelledby="about-title">
+    <div class="section-header">
+        <span class="eyebrow">01 / {t('nav.about')}</span>
+        <h2 id="about-title">{t('about.title')}</h2>
+        <p>{t('about.subtitle')}</p>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-text">
+            <p>{t('about.p1')}</p>
+            <p>{t('about.p2')}</p>
+            <a
+                class="btn btn--primary"
+                href="https://drive.google.com/file/d/1Vro7Lj0prsPxSOnsj9Y6c3yIdpbk7XB1/view?usp=sharing"
+                target="_blank"
+                rel="noopener"
+            >
+                <span class="material-icons" aria-hidden="true">download</span>
+                {t('download')}
+            </a>
+        </div>
+
+        <ul class="stats">
+            {stats.map((stat) => (
+                <li class="stat card">
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                </li>
+            ))}
+        </ul>
+    </div>
+</section>
+
+<style>
+    .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .about-text p {
+        max-width: 65ch;
+        margin: 0 0 1.25rem;
+        font-size: 1.05rem;
+    }
+
+    .about-text .btn {
+        margin-top: 0.5rem;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 1.25rem;
+    }
+
+    .stat strong {
+        color: var(--color-primary);
+        font-family: var(--font-heading);
+        font-size: 1.2rem;
+    }
+
+    .stat span {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+</style>

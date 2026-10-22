@@ -1,0 +1,97 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+import FormContact from "./FormContact";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const channels = [
+    { icon: "code", label: "GitHub", value: "LordMathi2741", href: "https://github.com/LordMathi2741" },
+    { icon: "work", label: "LinkedIn", value: "Mathias Alejandro Jave Diaz", href: "https://www.linkedin.com/in/mathias-alejandro-jave-diaz-68a364222/" },
+];
+---
+
+<section id="contact-section" aria-labelledby="contact-title">
+    <div class="section-header">
+        <span class="eyebrow">06 / {t('nav.contact')}</span>
+        <h2 id="contact-title">{t('contact.title')}</h2>
+        <p>{t('contact.subtitle')}</p>
+    </div>
+
+    <div class="contact-grid">
+        <ul class="channels">
+            {channels.map((channel) => (
+                <li>
+                    <a href={channel.href} target="_blank" rel="noopener" class="card channel">
+                        <span class="material-icons" aria-hidden="true">{channel.icon}</span>
+                        <span>
+                            <strong>{channel.label}</strong>
+                            <span class="channel-value">{channel.value}</span>
+                        </span>
+                    </a>
+                </li>
+            ))}
+        </ul>
+
+        <FormContact
+            submitLabel={t('form.submit')}
+            emailPlaceholder={t('form.email')}
+            messagePlaceholder={t('form.message')}
+            namePlaceholder={t('form.name')}
+            client:visible
+        />
+    </div>
+</section>
+
+<style>
+    .contact-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .channels {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .channel {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        color: var(--color-text);
+        text-decoration: none;
+        transition: border-color 0.2s;
+    }
+
+    .channel:hover {
+        border-color: var(--color-accent);
+    }
+
+    .channel .material-icons {
+        color: var(--color-accent);
+    }
+
+    .channel strong {
+        display: block;
+        color: var(--color-primary);
+    }
+
+    .channel-value {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+        overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 900px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

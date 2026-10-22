@@ -1,0 +1,45 @@
+---
+import { stack } from "../assets/data/stack.js";
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="stack-section" aria-labelledby="stack-title">
+    <div class="section-header">
+        <span class="eyebrow">04 / {t('nav.stack')}</span>
+        <h2 id="stack-title">{t('stack.title')}</h2>
+        <p>{t('stack.subtitle')}</p>
+    </div>
+
+    <div class="stack-grid">
+        {stack.map((group) => (
+            <div class="card stack-group">
+                <h3>{t(group.key)}</h3>
+                <ul class="badges">
+                    {group.items.map((item) => (
+                        <li class="badge">{typeof item === 'string' ? item : item[lang]}</li>
+                    ))}
+                </ul>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .stack-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .stack-group {
+        padding: 1.25rem 1.5rem;
+    }
+
+    h3 {
+        margin: 0 0 1rem;
+        font-size: 1rem;
+    }
+</style>

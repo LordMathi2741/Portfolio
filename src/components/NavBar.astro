@@ -1,262 +1,209 @@
 ---
 import languages from "../assets/data/languages.js";
 import { getLangFromUrl, useTranslations } from "../i18n/util";
-import SideBar from "./SideBar.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const links = [
+    { href: "#about-section", label: t('nav.about') },
+    { href: "#experience-section", label: t('nav.experience') },
+    { href: "#work-section", label: t('nav.works') },
+    { href: "#stack-section", label: t('nav.stack') },
+    { href: "#training-section", label: t('nav.training') },
+    { href: "#contact-section", label: t('nav.contact') },
+];
 ---
 
-<nav>
-    <ul>
-        <div aria-label="My Works section">
-            <a href="#work-section">
-                <i class="material-icons">
-                    work
-                </i>
-                <div class="display">
-                    <p>{t('nav.works')}</p>
-                </div>
+<header class="site-header">
+    <nav class="nav" aria-label="Main">
+        <a href={`/${lang}/`} class="logo">&lt; Mathias Jave /&gt;</a>
+
+        <ul class="nav-links" id="nav-links">
+            {links.map((link, index) => (
+                <li>
+                    <a href={link.href}>
+                        <span class="nav-index">{String(index + 1).padStart(2, '0')}</span>
+                        {link.label}
+                    </a>
+                </li>
+            ))}
+        </ul>
+
+        <div class="nav-actions">
+            <select class="select-lang" id="language-selector" aria-label="Language">
+                {languages.map(language => (
+                    <option value={language.value} selected={language.value === lang}>
+                        {language.value.toUpperCase()}
+                    </option>
+                ))}
+            </select>
+            <a
+                class="btn btn--primary download-btn"
+                href="https://drive.google.com/file/d/1Vro7Lj0prsPxSOnsj9Y6c3yIdpbk7XB1/view?usp=sharing"
+                target="_blank"
+                rel="noopener"
+            >
+                {t('download')}
             </a>
+            <button class="toggle-btn" id="nav-toggle" aria-label={t('nav.menu')} aria-expanded="false" aria-controls="nav-links">
+                <span class="material-icons">menu</span>
+            </button>
         </div>
+    </nav>
+</header>
 
-        <div aria-label="My Achievements section">
-            <a href="#achievements-section">
-                <i class="material-icons">
-                    school
-                </i>
-                <div class="display">
-                    <p>{t('nav.achievements')}</p>
-                </div>
-            </a>
-        </div>
+<script>
+    const selectLang = document.getElementById('language-selector') as HTMLSelectElement;
+    const toggle = document.getElementById('nav-toggle')!;
+    const links = document.getElementById('nav-links')!;
 
-        <div aria-label="My experience section">
-            <a href="#experience-section">
-                <i class="material-icons">
-                    history
-                </i>
-                <div class="display">
-                    <p>{t('nav.experience')}</p>
-                </div>
-            </a>
-        </div>
+    selectLang.addEventListener('change', () => {
+        const currentPath = window.location.pathname.split('/').slice(2).join('/');
+        window.location.href = `/${selectLang.value}/${currentPath}`;
+    });
 
-        <button class="download-btn">
-            {t('download')}
-        </button>
-
-        <select class="select-lang" data-languages={JSON.stringify(languages)}>
-        </select>
-    </ul>
-    <button class="toggle-btn" onclick="toggleMenu()">
-        <i class="material-icons">menu</i>
-    </button>
-</nav>
-
-<div class="sidebar-toggle">
-    <SideBar />
-</div>
-
-<div class="overlay"></div>
-
-<script is:client>
-    const sidebar = document.getElementsByClassName('sidebar-toggle')[0];
-    const overlay = document.getElementsByClassName('overlay')[0];
-    const selectLang = document.getElementsByClassName('select-lang')[0];
-    const languages = JSON.parse(selectLang.getAttribute('data-languages'));
-    const downloadBn = document.getElementsByClassName('download-btn')[0];
-
-    const currentLanguage = new URL(window.location.href).pathname.split('/')[1];
-
-    function toggleMenu() {
-        sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
-        overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+    function setOpen(open: boolean) {
+        links.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
     }
 
-    languages.forEach(language => {
-        const option = document.createElement('option');
-        option.value = language.value;
-        option.textContent = language.flag;
-        if (language.value === currentLanguage) {
-            option.selected = true;
-        }
-        selectLang.appendChild(option);
-    });
-
-    downloadBn.addEventListener('click', () => {
-        window.open("https://drive.google.com/file/d/1Vro7Lj0prsPxSOnsj9Y6c3yIdpbk7XB1/view?usp=sharing", "_blank");
-    });
-
-    selectLang.addEventListener('change', (event) => {
-        const selectedLanguage = event.target.value;
-        const url = new URL(window.location.href);
-        const currentPath = url.pathname.split('/').slice(2).join('/');
-        const newPath = `/${selectedLanguage}/${currentPath}`;
-        url.pathname = newPath;
-        window.scrollTo(0, 0);
-        window.location.href = url.href;
-    });
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            sidebar.style.display = 'none';
-            overlay.style.display = 'none';
-        }
+    toggle.addEventListener('click', () => setOpen(!links.classList.contains('open')));
+    links.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).closest('a')) setOpen(false);
     });
 </script>
 
 <style>
-    .select-lang {
-        background-color: transparent;
-        border: 2px solid transparent;
-        font-size: 2rem;
-        color: var(--color-text);
-        appearance: none;
-    }
-    
-    .download-btn {
-        background-color: var(--color-accent);
-        color: white;
-        border: 2px solid var(--color-accent);
-        border-radius: var(--radius-button);
-        padding: 0.5rem 1rem;
-        text-transform: uppercase;
-        text-decoration: none;
-        font-family: var(--font-body);
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: var(--font-body);
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .download-btn:hover {
-        background-color: var(--color-accent-hover);
-    }
-
-    .sidebar-toggle {
-        display: none;
-    }
-
-    .overlay {
-        display: none;
-        position: fixed;
+    .site-header {
+        position: sticky;
         top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 99;
-    }
-
-    p {
-        font-size: 1rem;
-        margin-top: 20px;
-    }
-
-    nav {
-        background-color: var(--color-surface);
-        color: var(--color-text);
-        padding: 30px;
-        border-radius: 0;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
         z-index: 100;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        background-color: var(--color-surface);
         border-bottom: 1px solid var(--color-border);
     }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0 auto;
+    .nav {
         display: flex;
-        justify-content: space-evenly;
         align-items: center;
-        gap: 20px;
-        max-width: 1400px;
-        width: 100%;
+        justify-content: space-between;
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 14px 24px;
     }
 
-    li {
-        margin-bottom: 0;
-        
+    .logo {
+        color: var(--color-primary);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
     }
 
-    .material-icons {
-        font-size: 2rem;
+    .nav-links {
+        display: flex;
+        gap: 1.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .nav-links a {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.35rem;
         color: var(--color-text);
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
         transition: color 0.2s;
     }
 
-    .display {
-        display: none;
-        position: absolute;
-        background-color: var(--color-surface);
-        color: var(--color-text);
-        padding: 5px 10px;
-        border-radius: var(--radius-badge);
-        text-align: center;
-        font-family: var(--font-body);
-        font-size: 0.85rem;
-        box-shadow: var(--shadow-card);
-        white-space: nowrap;
-        transform: translate(-25%, 10px);
-    }
-    
-    .display p {
-        margin: 0;
+    .nav-links a:hover {
+        color: var(--color-accent);
     }
 
-    a {
-        text-decoration: none;
+    .nav-index {
+        color: var(--color-accent);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.75rem;
+    }
+
+    .nav-actions {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        position: relative;
+        gap: 0.75rem;
     }
 
-    .material-icons:hover + .display {
-        display: block;
-    }
-
-    i:hover {
+    .select-lang {
+        min-height: 44px;
+        padding: 0 0.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-button);
+        background-color: transparent;
+        color: var(--color-text);
+        font-family: var(--font-body);
+        font-weight: 600;
         cursor: pointer;
+    }
+
+    .select-lang option {
+        background-color: var(--color-surface);
     }
 
     .toggle-btn {
         display: none;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-button);
+        background-color: transparent;
+        color: var(--color-text);
+        cursor: pointer;
     }
 
-    @media (max-width: 768px) {
-        ul {
-            display: none;
+    @media (max-width: 1024px) {
+        .nav {
+            position: relative;
+            padding: 12px 16px;
         }
 
         .toggle-btn {
-            display: block;
-            color: white;
-            background-color: var(--color-accent);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 45px;
-            margin-right: 30px;
+            display: inline-flex;
         }
 
-        .toggle-btn .material-icons {
-            color: white;
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            gap: 0;
+            padding: 0.5rem 16px 1rem;
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-card-hover);
         }
-    
 
-        nav {
+        .nav-links.open {
             display: flex;
-            justify-content: flex-end;
-            padding: 1rem;
+        }
+
+        .nav-links a {
+            width: 100%;
+            min-height: 44px;
+            align-items: center;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .download-btn {
+            display: none;
         }
     }
 </style>

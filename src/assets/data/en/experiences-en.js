@@ -1,35 +1,41 @@
 export const experiencesEn = [
     {
         title: "Junior Software Engineer",
-        company: "ITSIGHT CONSULTING (Client: Western Union)",
-        date: "02/2025 - Present",
+        company: "ITSIGHT Consulting (client: Western Union)",
+        location: "Lima, Peru",
+        date: "Feb 2025 - Present",
+        tags: ["C#", "ASP.NET Core (.NET 8)", "SQL Server", "SSIS", "Azure", "Okta", "CyberArk", "RBAC", "Checkmarx", "Hexagonal Architecture"],
         responsibilities: [
-            "Developed and maintained 4 web applications using .NET Core, React, and SQL Server.",
-            "Participated in the migration of legacy Visual Basic .NET modules to .NET Core 8, ensuring compatibility and performance in the new tech stack.",
-            "Integrated 2 payment gateways (Ligo and Pago Efectivo) via REST APIs, implementing custom middleware and automating billing flows.",
-            "Configured centralized logging across 4 applications for monitoring, detection, and diagnosis of incidents in non-production environments.",
-            "Participated in the design and development of REST APIs in .NET Core 8 using approaches such as Hexagonal, MVC, and Layered Architecture.",
-            "Secured access to 4 applications and their APIs using JWT, OKTA, and CyberArk.",
-            "Integrated Role-Based Access Control (RBAC) in 2 applications, ensuring secure access to user modules.",
-            "Fixed between 20 and 30 security vulnerabilities in applications detected by Checkmarx, applying remediation according to OWASP Top 10 and meeting established deadlines.",
-            "Collaborated in requirements gathering and follow-up meetings with Stakeholders in support of assigned project leaders."
+            "Design and development of REST APIs in ASP.NET Core (.NET 8) using Hexagonal, MVC and layered architecture.",
+            "System integration through REST APIs with external payment gateways (Ligo and Pago Efectivo), with custom middleware and automated billing flows.",
+            "Implementation of authentication and authorization with identity providers (Okta, CyberArk) and role-based access control (RBAC).",
+            "Traceability through logging to monitor and detect incidents in production and non-production environments.",
+            "Use of Azure services in production applications: Blob Storage, Key Vault, App Service and Azure Database for MySQL.",
+            "Maintenance of the WebFX project for web-based currency exchange, with a scalable architecture applicable globally.",
+            "Maintenance of back-office applications with progressive .NET upgrades (5, 8 and 10) under Microsoft LTS policies, and optimization of business rules through SQL Server stored procedures.",
+            "Migration of legacy Visual Basic .NET modules to .NET Core 8, ensuring compatibility and performance.",
+            "Data flows and ETL processes with SQL Server and SSIS for accounting information processed by globally distributed teams.",
+            "Requirements gathering and follow-up meetings with stakeholders to ensure technical alignment."
         ],
         achievements: [
-            "Reduced average transfer time to 1 minute per operation.",
-            "Successfully migrated 8 modules in the accounting and tax areas, managing accounting books with over 1000 records.",
-            "Optimized the generation time of accounting books from 5 minutes to 50 seconds per book.",
-            "Automated traceability reports for generating accounting groupings."
+            "Reduced the average WebFX transfer time to 1 minute per operation by integrating the Ligo API into a centralized payment-provider API, itself integrated into WebFX.",
+            "Remediated 30 critical and high vulnerabilities reported by Checkmarx in the Poseidon Peru project, avoiding delays in the production release.",
+            "Cut accounting book generation time from 5 minutes to 50 seconds per book.",
+            "Successfully migrated 8 Visual Basic .NET modules to .NET Core 8 in the accounting and tax area, handling accounting books with over 1,000 records.",
+            "Automated traceability reports for grouping accounting entries."
         ]
     },
     {
         title: "FullStack Developer",
         company: "Hiperfast SAC",
-        date: "07/2024 - 01/2025",
+        location: "Callao, Peru",
+        date: "Jul 2024 - Jan 2025",
+        tags: ["C#", ".NET Core 8", "MySQL", "Docker"],
         responsibilities: [
-            "Developed 2 web systems (ISO 17020 certificate validation and invoice control) implementing a layered architecture in C# and .NET Core with data access via SQL.",
-            "Optimized SQL queries in MySQL, improving response times and ensuring data integrity in critical operations.",
-            "Containerized both systems with Docker and configured production deployment, improving the portability and availability of the environment.",
-            "Evaluated technical risks and proposed security solutions, strengthening system resilience in production."
+            "Development of web systems for ISO 17020 certificate validation and invoice control with a layered architecture in .NET Core 8 and MySQL.",
+            "Containerization with Docker and production deployment setup, ensuring high availability and portability.",
+            "MySQL query optimization, reducing response times and ensuring transactional integrity in critical operations.",
+            "Technical risk assessment and implementation of security measures in production environments."
         ],
         achievements: [
             "Automated the search for technical inspection reports, reducing the time from weeks to 10 seconds per certificate."

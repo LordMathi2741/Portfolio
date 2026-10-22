@@ -1,0 +1,177 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+
+const { data } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="experience-section" aria-labelledby="experience-title">
+    <div class="section-header">
+        <span class="eyebrow">02 / {t('nav.experience')}</span>
+        <h2 id="experience-title">{t('experience.title')}</h2>
+        <p>{t('experience.subtitle')}</p>
+    </div>
+
+    <ol class="timeline">
+        {data.map((item, index) => (
+            <li class="timeline-item">
+                <span class="timeline-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <article class="card timeline-content">
+                    <header class="experience-header">
+                        <div>
+                            <h3>{item.company}</h3>
+                            <p class="experience-role">{item.title}{item.location && ` · ${item.location}`}</p>
+                        </div>
+                        <span class="experience-date">{item.date}</span>
+                    </header>
+
+                    {item.achievements?.length > 0 && (
+                        <div class="achievements">
+                            <h4>{t('experience.achievements')}</h4>
+                            <ul>
+                                {item.achievements.map((ach) => <li>{ach}</li>)}
+                            </ul>
+                        </div>
+                    )}
+
+                    {item.responsibilities?.length > 0 && (
+                        <ul class="experience-list">
+                            {item.responsibilities.map((resp) => <li>{resp}</li>)}
+                        </ul>
+                    )}
+
+                    {item.tags?.length > 0 && (
+                        <ul class="badges">
+                            {item.tags.map((tag) => <li class="badge">{tag}</li>)}
+                        </ul>
+                    )}
+                </article>
+            </li>
+        ))}
+    </ol>
+</section>
+
+<style>
+    .timeline {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 19px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--color-border);
+    }
+
+    .timeline-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-index {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--color-surface);
+        border: 2px solid var(--color-accent);
+        color: var(--color-accent-strong);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+
+    :global([data-theme="dark"]) .timeline-index {
+        color: var(--color-accent);
+    }
+
+    .timeline-content {
+        padding: 1.75rem;
+    }
+
+    .experience-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .experience-role {
+        margin: 0.15rem 0 0;
+        color: var(--color-text-secondary);
+        font-weight: 500;
+    }
+
+    .experience-date {
+        color: var(--color-text-secondary);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .achievements {
+        margin-bottom: 1.25rem;
+        padding: 1rem 1.25rem;
+        border-left: 3px solid var(--color-accent);
+        background-color: var(--color-accent-bg);
+        border-radius: 0 var(--radius-badge) var(--radius-badge) 0;
+    }
+
+    h4 {
+        margin: 0 0 0.5rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .achievements ul,
+    .experience-list {
+        margin: 0;
+        padding-left: 1.25rem;
+    }
+
+    .achievements li,
+    .experience-list li {
+        margin-bottom: 0.4rem;
+    }
+
+    .experience-list {
+        margin-bottom: 1.25rem;
+        color: var(--color-text);
+    }
+
+    @media (max-width: 640px) {
+        .timeline::before,
+        .timeline-index {
+            display: none;
+        }
+
+        .timeline-item {
+            grid-template-columns: 1fr;
+        }
+
+        .timeline-content {
+            padding: 1.25rem;
+        }
+    }
+</style>

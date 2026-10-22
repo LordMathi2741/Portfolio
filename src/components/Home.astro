@@ -1,0 +1,31 @@
+---
+import { getLangFromUrl } from "../i18n/util";
+import Layout from "../layouts/Layout.astro";
+import DataDetector from "../utils/data-detector";
+import About from "./About.astro";
+import Contact from "./Contact.astro";
+import Experience from "./Experience.astro";
+import Footer from "./Footer.astro";
+import Hero from "./Hero.astro";
+import NavBar from "./NavBar.astro";
+import Projects from "./Projects.astro";
+import Stack from "./Stack.astro";
+import Training from "./Training.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { works, experiences } = DataDetector.detect(lang);
+---
+
+<Layout>
+	<NavBar />
+	<main class="main__container">
+		<Hero />
+		<About />
+		<Experience data={experiences} />
+		<Projects data={works} />
+		<Stack />
+		<Training />
+		<Contact />
+		<Footer />
+	</main>
+</Layout>

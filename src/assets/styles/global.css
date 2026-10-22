@@ -1,115 +1,142 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
-* {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.main__container{
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+}
+
+body {
+    margin: 0;
+    overflow-x: clip;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.main__container {
     display: flex;
     flex-direction: column;
-    gap: 80px;
-    max-width: 1280px;
+    gap: 112px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 24px 48px;
 }
 
-@media screen and (max-width: 640px) {
-    .main__container {
-        gap: 48px;
-        padding: 0 16px;
-    }
+/* Encabezado común de sección: número + título + subtítulo */
+.section-header {
+    max-width: 68ch;
+    margin-bottom: 2.5rem;
 }
 
-section h1 {
- text-align: center;
+.section-header .eyebrow {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
 
-
-.text-content {
-    max-width: 75ch;
-    margin: 0 auto;
-}
-
-.section h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+.section-header h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 3.5vw, 2rem);
     font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
 }
 
-.tech-group h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
+.section-header p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.badge {
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent-strong);
+    border-radius: var(--radius-badge);
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .badge {
+    color: var(--color-accent);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 10px 22px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-button);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn--primary {
+    background-color: var(--color-accent-strong);
+    color: white;
+}
+
+.btn--primary:hover {
+    background-color: #075985;
+}
+
+.btn--ghost {
+    background-color: transparent;
+    border-color: var(--color-border);
     color: var(--color-text);
 }
 
-[data-theme="dark"] .tech-group h3 {
-    color: #A5B4FC;
+.btn--ghost:hover {
+    border-color: var(--color-accent);
 }
 
-.hero-content {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
-.developer__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 25px;
-    gap: 2rem;
+.card {
     background-color: var(--color-surface);
-}
-
-.developer__content {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    padding-top: 100px;
-}
-
-.developer__content img {
-    width: 100%;
-    height: 300px;
-    max-width: 100%;
-    object-fit: cover;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
 }
 
-.developer__details {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-}
-
-.developer__details h1 {
-    font-weight: bold;
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    margin-top: 15px;
-}
-
-.developer__details h2 {
-    color: var(--color-text-secondary);
-    letter-spacing: 0.5px;
-    font-size: 1.25rem;
-    margin-top: 5px;
-}
-
+/* Formulario de contacto */
 form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 80%;
-    margin: 50px auto 0;
-    padding: clamp(30px, 8vw, 100px);
+    gap: 16px;
+    width: 100%;
+    padding: 2rem;
     background-color: var(--color-surface);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
@@ -121,7 +148,6 @@ form textarea {
     padding: 12px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-button);
-    outline: none;
     font-family: var(--font-body);
     background-color: var(--color-bg);
     color: var(--color-text);
@@ -134,51 +160,40 @@ form input {
 }
 
 form textarea {
-    height: 200px;
+    min-height: 180px;
     resize: vertical;
 }
 
 form button {
-    padding: 12px 24px;
+    align-self: flex-start;
+    min-height: 48px;
+    padding: 12px 28px;
     border: none;
     border-radius: var(--radius-button);
-    outline: none;
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-strong);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     font-family: var(--font-body);
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s;
-    align-self: flex-start;
-    width: 250px;
-    height: 48px;
-    font-size: large;
 }
 
 form button:hover {
-    background-color: var(--color-accent-hover);
-}
-
-.work-content h3 {
-    color: var(--color-accent);
-}
-
-@media screen and (max-width: 1024px) {
-    .developer__container {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .developer__content,
-    .developer__details {
-        align-items: center;
-        text-align: center;
-    }
+    background-color: #075985;
 }
 
 @media screen and (max-width: 640px) {
-    .developer__content img {
-        width: 220px;
-        height: 220px;
+    .main__container {
+        gap: 64px;
+        padding: 0 16px 32px;
+    }
+
+    form {
+        padding: 1.25rem;
+    }
+
+    form button {
+        align-self: stretch;
     }
 }

@@ -22,7 +22,7 @@ Fuente de verdad sobre los proyectos personales, académicos y de hackathon del 
 | EcoGuardian | Curso UPC — Desarrollo de Soluciones IoT (proyecto multi-ciclo, estilo startup) | ASP.NET Core, Vue.js, Flutter, IoT (sensores), DDD, Stripe, Docker | [Landing Page](https://sage-granita-e4aafb.netlify.app/) · [App Web](https://ecoguardian-tf.vercel.app/) · [Repo](https://github.com/WemadeRemastered/EcoGuardian-Report) |
 | Vivlo | Proyecto personal / lado a lado con la carrera | Flutter, .NET Core, AWS (API Gateway, Lambda, Bedrock) | Pendiente de agregar |
 | Control de asistencia con reconocimiento facial | Freelance | FastAPI, Flutter, MobileNet, MySQL | No disponible |
-| ScamShield — Detección de estafas en compras digitales | Tesis de pregrado | .NET Core, Next.js, Machine Learning (Random Forest, Scikit-Learn), Fine-Tuning (DistilBERT, Transformers) | [Demo](https://scamshield.ryzeon.dev/) |
+| ScamShield — Detección de estafas en compras digitales | Tesis de pregrado | .NET Core, Next.js, Machine Learning (Machine Learning, Scikit-Learn), Fine-Tuning (DistilBERT, Transformers) | [Demo](https://scamshield.ryzeon.dev/) |
 
 Detalle completo de cada proyecto (descripción, arquitectura, funcionalidades e imagen) en `references/proyectos-detallados.md`.
 
@@ -32,7 +32,7 @@ Detalle completo de cada proyecto (descripción, arquitectura, funcionalidades e
 - **Hackathon:** Plataforma de educación a distancia (EducHack 2024).
 - **Cursos UPC:** E-commerce con recomendaciones, App de alquiler de espacios, Colaboración entre Artistas y Escritores, EcoGuardian.
 - **Proyecto propio / IA aplicada:** Vivlo — integra Inteligencia Artificial (AWS Bedrock) con enfoque en salud digital.
-- **Tesis de pregrado:** ScamShield — el proyecto de mayor profundidad técnica en IA/ML: combina un modelo de clasificación (Random Forest) con fine-tuning de un modelo de lenguaje (DistilBERT) para detectar reseñas fraudulentas en el contexto peruano. Es el proyecto más fuerte para demostrar dominio real en Machine Learning, no solo consumo de APIs de IA.
+- **Tesis de pregrado:** ScamShield — el proyecto de mayor profundidad técnica en IA/ML: combina un modelo de clasificación (Machine Learning) con fine-tuning de un modelo de lenguaje (DistilBERT) para detectar reseñas fraudulentas en el contexto peruano. Es el proyecto más fuerte para demostrar dominio real en Machine Learning, no solo consumo de APIs de IA.
 
 ## Versiones por contexto
 
@@ -54,7 +54,7 @@ Menciona como máximo 1 proyecto, el más alineado a la vacante específica (pre
 ## Prioridades para sector bancario/fintech
 
 Cuando el contexto sea una postulación a banca o fintech, ordena así:
-1. **ScamShield (tesis)** — el proyecto más alineado a banca/fintech de todo el portafolio: detección de fraude/estafas mediante Machine Learning (Random Forest) y NLP (fine-tuning de DistilBERT), un dominio directamente aplicable a prevención de fraude financiero. Siempre priorizar este proyecto cuando la vacante mencione fraude, riesgo, seguridad transaccional o IA aplicada.
+1. **ScamShield (tesis)** — el proyecto más alineado a banca/fintech de todo el portafolio: detección de fraude/estafas mediante Machine Learning (Machine Learning) y NLP (fine-tuning de DistilBERT), un dominio directamente aplicable a prevención de fraude financiero. Siempre priorizar este proyecto cuando la vacante mencione fraude, riesgo, seguridad transaccional o IA aplicada.
 2. **Validación y control de facturas** — maneja pagos, estados financieros, gráficos de consumo; usa Docker (relevante para infraestructura en la nube/Azure).
 3. **Validación de reportes** — cliente real con acreditación, gestión administrativa de consumo.
 4. **App de alquiler de espacios para eventos** — arquitectura robusta (CQRS + DDD), integra pagos (PayPal), autenticación externa (FireAuth) y pruebas unitarias (XUnit); útil para mostrar madurez técnica aunque el dominio no sea financiero.

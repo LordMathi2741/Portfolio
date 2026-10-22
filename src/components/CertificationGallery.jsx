@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-export default function CertificationGallery({ items }) {
+export default function CertificationGallery({ items, verifyLabel = 'Verify' }) {
   const images = items.filter((item) => item.image);
   const [active, setActive] = useState(null);
 
@@ -28,8 +28,8 @@ export default function CertificationGallery({ items }) {
   return (
     <div className="cert-gallery">
       {images.map((item, index) => (
+        <div key={item.image} className="cert-card">
         <button
-          key={item.image}
           type="button"
           className="cert-thumb"
           onClick={() => setActive(index)}
@@ -40,9 +40,21 @@ export default function CertificationGallery({ items }) {
           </span>
           <span className="cert-caption">
             <span className="cert-title">{item.title}</span>
-            {item.issuer && <span className="cert-issuer">{item.issuer}</span>}
+            {item.issuer && (
+              <span className="cert-issuer">
+                {[item.issuer, item.date].filter(Boolean).join(' · ')}
+              </span>
+            )}
+            {item.credentialId && <span className="cert-id">ID: {item.credentialId}</span>}
           </span>
         </button>
+        {item.verifyUrl && (
+          <a className="cert-verify" href={item.verifyUrl} target="_blank" rel="noopener">
+            {verifyLabel}
+            <span className="material-icons" aria-hidden="true">open_in_new</span>
+          </a>
+        )}
+        </div>
       ))}
 
       {active !== null && (
@@ -87,18 +99,52 @@ export default function CertificationGallery({ items }) {
           padding: 2rem 0;
         }
 
-        .cert-thumb {
+        .cert-card {
           display: flex;
           flex-direction: column;
-          padding: 0;
-          text-align: left;
           border: 1px solid var(--color-border);
           border-radius: var(--radius-card);
           background-color: var(--color-surface);
           box-shadow: var(--shadow-card);
           overflow: hidden;
-          cursor: zoom-in;
           transition: box-shadow 0.2s, transform 0.3s ease;
+        }
+
+        .cert-thumb {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          padding: 0;
+          text-align: left;
+          border: none;
+          background: none;
+          color: inherit;
+          font: inherit;
+          cursor: zoom-in;
+        }
+
+        .cert-verify {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          min-height: 44px;
+          padding: 0 1.25rem 0.5rem;
+          color: var(--color-accent-strong);
+          font-size: 0.9rem;
+          font-weight: 600;
+          text-decoration: none;
+        }
+
+        .cert-verify:hover {
+          text-decoration: underline;
+        }
+
+        [data-theme="dark"] .cert-verify {
+          color: var(--color-accent);
+        }
+
+        .cert-verify .material-icons {
+          font-size: 1rem;
         }
 
         .cert-image {
@@ -138,6 +184,12 @@ export default function CertificationGallery({ items }) {
           font-size: 0.9rem;
         }
 
+        .cert-id {
+          color: var(--color-text-secondary);
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 0.8rem;
+        }
+
         .cert-zoom {
           position: absolute;
           right: 12px;
@@ -150,8 +202,8 @@ export default function CertificationGallery({ items }) {
           transition: opacity 0.2s;
         }
 
-        .cert-thumb:hover,
-        .cert-thumb:focus-visible {
+        .cert-card:hover,
+        .cert-card:focus-within {
           box-shadow: var(--shadow-card-hover);
           transform: translateY(-4px);
         }
