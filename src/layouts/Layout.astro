@@ -9,14 +9,29 @@ const lang = getLangFromUrl(Astro.url);
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content="Mathias Jave Diaz — Full-Stack Developer (C#, .NET, React) orientado al sector financiero." />
+		<meta name="author" content="Mathias Jave Diaz" />
+		<meta name="robots" content="index, follow" />
+		<meta name="theme-color" content="#0A2540" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:creator" content="@lordmathi2741" />
+		<meta name="twitter:title" content="Mathias Jave Diaz · Software Engineer" />
+		<meta name="twitter:description" content="Mathias Jave Diaz — Software Engineer (Azure, .NET, React) orientado al sector financiero." />
+		<meta name="twitter:image" content="https://mathiasjave.com/og-image.png" />
+		<meta property="og:title" content="Mathias Jave Diaz · Software Engineer" />
+		<meta property="og:description" content="Mathias Jave Diaz — Software Engineer (Azure, .NET, React) orientado al sector financiero." />
+		<meta property="og:image" content="https://mathiasjave.com/og-image.png" />
+		<meta property="og:url" content="https://mathiasjave.com" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Mathias Jave Diaz" />
+		<meta name="keywords" content="Mathias Jave Diaz, Software Engineer, Azure, .NET, React, Frontend, Backend, Fullstack, Developer, Portfolio" />
+		<meta name="description" content="Mathias Jave Diaz — Software Engineer (Azure, .NET, React) orientado al sector financiero." />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>Mathias Jave Diaz · Full-Stack Developer</title>
+		<title>Mathias Jave Diaz · Software Engineer</title>
 		<script is:inline>
 			const theme = (() => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -54,6 +69,7 @@ const lang = getLangFromUrl(Astro.url);
 		--color-text: #1C1E21;         /* Texto principal */
 		--color-text-secondary: #6B7280;
 		--color-border: #E5E7EB;
+		--color-border-input: #848D9A; /* ≥3:1 sobre superficie y fondo (WCAG 1.4.11) */
 		--color-surface: #FFFFFF;      /* Cards */
 
 		/* Acento — opción A (Tech/Cyan) */
@@ -87,6 +103,7 @@ const lang = getLangFromUrl(Astro.url);
 		--color-text-secondary: #94A3B8;
 		--color-surface: #1E293B;
 		--color-border: #334155;
+		--color-border-input: #6B7A90;
 	}
 
 	body{

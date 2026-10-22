@@ -14,11 +14,15 @@ const t = useTranslations(lang);
 </footer>
 
 <style>
+    /* fuera de <main>: replica el ancho y el espaciado del contenedor principal */
     .footer {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         gap: 1rem;
+        width: calc(100% - 48px);
+        max-width: 1152px;
+        margin: 64px auto 48px;
         padding: 2rem 0 0;
         border-top: 1px solid var(--color-border);
         color: var(--color-text-secondary);
@@ -40,6 +44,17 @@ const t = useTranslations(lang);
     }
 
     a:hover {
+        color: var(--color-accent-strong);
+    }
+
+    :global([data-theme="dark"]) a:hover {
         color: var(--color-accent);
+    }
+
+    @media (max-width: 640px) {
+        .footer {
+            width: calc(100% - 32px);
+            margin: 32px auto;
+        }
     }
 </style>

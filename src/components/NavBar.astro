@@ -16,7 +16,7 @@ const links = [
 ---
 
 <header class="site-header">
-    <nav class="nav" aria-label="Main">
+    <nav class="nav" aria-label={t('nav.main')}>
         <a href={`/${lang}/`} class="logo">&lt; Mathias Jave /&gt;</a>
 
         <ul class="nav-links" id="nav-links">
@@ -31,7 +31,7 @@ const links = [
         </ul>
 
         <div class="nav-actions">
-            <select class="select-lang" id="language-selector" aria-label="Language">
+            <select class="select-lang" id="language-selector" aria-label={t('nav.language')}>
                 {languages.map(language => (
                     <option value={language.value} selected={language.value === lang}>
                         {language.value.toUpperCase()}
@@ -47,7 +47,7 @@ const links = [
                 {t('download')}
             </a>
             <button class="toggle-btn" id="nav-toggle" aria-label={t('nav.menu')} aria-expanded="false" aria-controls="nav-links">
-                <span class="material-icons">menu</span>
+                <span class="material-icons" aria-hidden="true">menu</span>
             </button>
         </div>
     </nav>
@@ -69,6 +69,12 @@ const links = [
     }
 
     toggle.addEventListener('click', () => setOpen(!links.classList.contains('open')));
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && links.classList.contains('open')) {
+            setOpen(false);
+            toggle.focus();
+        }
+    });
     links.addEventListener('click', (e) => {
         if ((e.target as HTMLElement).closest('a')) setOpen(false);
     });
@@ -121,13 +127,18 @@ const links = [
     }
 
     .nav-links a:hover {
-        color: var(--color-accent);
+        color: var(--color-accent-strong);
     }
 
     .nav-index {
-        color: var(--color-accent);
+        color: var(--color-accent-strong);
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         font-size: 0.75rem;
+    }
+
+    :global([data-theme="dark"]) .nav-links a:hover,
+    :global([data-theme="dark"]) .nav-index {
+        color: var(--color-accent);
     }
 
     .nav-actions {

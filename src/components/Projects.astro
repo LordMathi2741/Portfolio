@@ -30,6 +30,8 @@ const categories = ['client', 'thesis', 'academic', 'personal']
         ))}
     </div>
 
+    <p class="sr-only" id="projects-status" aria-live="polite" data-template={t('works.filter.status')}></p>
+
     <ul class="projects" id="projects-list">
         {data.map((item) => (
             <li class="card project" data-category={item.category}>
@@ -58,14 +60,18 @@ const categories = ['client', 'thesis', 'academic', 'personal']
 <script>
     const pills = document.querySelectorAll<HTMLButtonElement>('#work-section .pill');
     const projects = document.querySelectorAll<HTMLElement>('#projects-list .project');
+    const status = document.getElementById('projects-status')!;
 
     pills.forEach((pill) => {
         pill.addEventListener('click', () => {
             const filter = pill.dataset.filter;
             pills.forEach((p) => p.setAttribute('aria-pressed', String(p === pill)));
+            let visible = 0;
             projects.forEach((project) => {
                 project.hidden = filter !== 'all' && project.dataset.category !== filter;
+                if (!project.hidden) visible++;
             });
+            status.textContent = status.dataset.template!.replace('{count}', String(visible));
         });
     });
 </script>

@@ -11,6 +11,7 @@ const t = useTranslations(lang);
 const certsPending = certfieds.filter((item) => !item.image);
 const awardItems = awards.map((award) => ({ image: award.image, title: award[lang].title, issuer: award[lang].detail }));
 const awardsPending = awardItems.filter((item) => !item.image);
+const galleryLabels = { close: t('gallery.close'), prev: t('gallery.prev'), next: t('gallery.next') };
 ---
 
 <section id="training-section" aria-labelledby="training-title">
@@ -36,7 +37,7 @@ const awardsPending = awardItems.filter((item) => !item.image);
     </article>
 
     <h3 class="subheading">{t('training.certifications')}</h3>
-    <CertificationGallery items={certfieds} verifyLabel={t('training.verify')} client:visible />
+    <CertificationGallery items={certfieds} verifyLabel={t('training.verify')} labels={galleryLabels} client:visible />
     {certsPending.length > 0 && (
         <ul class="pending">
             {certsPending.map((item) => (
@@ -50,7 +51,7 @@ const awardsPending = awardItems.filter((item) => !item.image);
     )}
 
     <h3 class="subheading">{t('training.awards')}</h3>
-    <CertificationGallery items={awardItems} client:visible />
+    <CertificationGallery items={awardItems} labels={galleryLabels} client:visible />
     {awardsPending.length > 0 && (
         <ul class="pending">
             {awardsPending.map((item) => (

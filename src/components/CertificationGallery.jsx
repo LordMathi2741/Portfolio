@@ -1,8 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-export default function CertificationGallery({ items, verifyLabel = 'Verify' }) {
+const defaultLabels = { close: 'Close', prev: 'Previous', next: 'Next' };
+
+export default function CertificationGallery({ items, verifyLabel = 'Verify', labels = defaultLabels }) {
   const images = items.filter((item) => item.image);
   const [active, setActive] = useState(null);
+  const dialogRef = useRef(null);
+  const closeRef = useRef(null);
+  const openerRef = useRef(null);
 
   const close = useCallback(() => setActive(null), []);
   const move = useCallback(
@@ -10,12 +15,34 @@ export default function CertificationGallery({ items, verifyLabel = 'Verify' }) 
     [images.length]
   );
 
+  const isOpen = active !== null;
+
+  // Al abrir, el foco entra al diálogo; al cerrar, vuelve a la miniatura que lo abrió
   useEffect(() => {
-    if (active === null) return;
+    if (!isOpen) return;
+    closeRef.current?.focus();
+    return () => openerRef.current?.focus();
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
     const onKey = (e) => {
       if (e.key === 'Escape') close();
       if (e.key === 'ArrowRight') move(1);
       if (e.key === 'ArrowLeft') move(-1);
+      if (e.key === 'Tab') {
+        // mantiene el foco dentro del diálogo mientras está abierto
+        const focusable = dialogRef.current.querySelectorAll('button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
@@ -23,7 +50,7 @@ export default function CertificationGallery({ items, verifyLabel = 'Verify' }) 
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [active, close, move]);
+  }, [isOpen, close, move]);
 
   return (
     <div className="cert-gallery">
@@ -32,10 +59,11 @@ export default function CertificationGallery({ items, verifyLabel = 'Verify' }) 
         <button
           type="button"
           className="cert-thumb"
-          onClick={() => setActive(index)}
+          aria-haspopup="dialog"
+          onClick={(e) => { openerRef.current = e.currentTarget; setActive(index); }}
         >
           <span className="cert-image">
-            <img src={item.image} alt={item.title} loading="lazy" />
+            <img src={item.image} alt="" loading="lazy" />
             <span className="material-icons cert-zoom" aria-hidden="true">zoom_in</span>
           </span>
           <span className="cert-caption">
@@ -58,9 +86,9 @@ export default function CertificationGallery({ items, verifyLabel = 'Verify' }) 
       ))}
 
       {active !== null && (
-        <div className="cert-lightbox" role="dialog" aria-modal="true" aria-label={images[active].title} onClick={close}>
-          <button type="button" className="cert-btn cert-close" onClick={close} aria-label="Close">
-            <span className="material-icons">close</span>
+        <div ref={dialogRef} className="cert-lightbox" role="dialog" aria-modal="true" aria-label={images[active].title} onClick={close}>
+          <button ref={closeRef} type="button" className="cert-btn cert-close" onClick={close} aria-label={labels.close}>
+            <span className="material-icons" aria-hidden="true">close</span>
           </button>
           {images.length > 1 && (
             <>
@@ -68,17 +96,17 @@ export default function CertificationGallery({ items, verifyLabel = 'Verify' }) 
                 type="button"
                 className="cert-btn cert-prev"
                 onClick={(e) => { e.stopPropagation(); move(-1); }}
-                aria-label="Previous"
+                aria-label={labels.prev}
               >
-                <span className="material-icons">chevron_left</span>
+                <span className="material-icons" aria-hidden="true">chevron_left</span>
               </button>
               <button
                 type="button"
                 className="cert-btn cert-next"
                 onClick={(e) => { e.stopPropagation(); move(1); }}
-                aria-label="Next"
+                aria-label={labels.next}
               >
-                <span className="material-icons">chevron_right</span>
+                <span className="material-icons" aria-hidden="true">chevron_right</span>
               </button>
             </>
           )}

@@ -19,6 +19,57 @@ img {
     max-width: 100%;
 }
 
+/* Texto solo para lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Enlace para saltar la navegación; visible solo al recibir foco */
+.skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 200;
+    padding: 10px 16px;
+    border-radius: var(--radius-button);
+    background-color: var(--color-accent-strong);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-150%);
+}
+
+.skip-link:focus {
+    transform: none;
+}
+
+/* destino del skip link: recibe foco por script, no necesita anillo */
+#main-content:focus {
+    outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -46,11 +97,15 @@ select:focus-visible {
 .section-header .eyebrow {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--color-accent);
+    color: var(--color-accent-strong);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.04em;
+}
+
+[data-theme="dark"] .section-header .eyebrow {
+    color: var(--color-accent);
 }
 
 .section-header h2 {
@@ -146,13 +201,22 @@ form {
 form input,
 form textarea {
     padding: 12px;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-input);
     border-radius: var(--radius-button);
     font-family: var(--font-body);
     background-color: var(--color-bg);
     color: var(--color-text);
     width: 100%;
     font-size: 1rem;
+}
+
+form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
 }
 
 form input {
@@ -181,6 +245,37 @@ form button {
 
 form button:hover {
     background-color: #075985;
+}
+
+form button:disabled {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+.form-status {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* la región viva sigue en el DOM para que los lectores anuncien cambios; vacía no ocupa espacio */
+.form-status:empty {
+    margin-top: -16px;
+}
+
+.form-status--success {
+    color: #15803d;
+}
+
+.form-status--error {
+    color: #b91c1c;
+}
+
+[data-theme="dark"] .form-status--success {
+    color: #4ade80;
+}
+
+[data-theme="dark"] .form-status--error {
+    color: #f87171;
 }
 
 @media screen and (max-width: 640px) {

@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl } from "../i18n/util";
+import { getLangFromUrl, useTranslations } from "../i18n/util";
 import Layout from "../layouts/Layout.astro";
 import DataDetector from "../utils/data-detector";
 import About from "./About.astro";
@@ -13,12 +13,14 @@ import Stack from "./Stack.astro";
 import Training from "./Training.astro";
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const { works, experiences } = DataDetector.detect(lang);
 ---
 
 <Layout>
+	<a href="#main-content" class="skip-link">{t('skip')}</a>
 	<NavBar />
-	<main class="main__container">
+	<main class="main__container" id="main-content" tabindex="-1">
 		<Hero />
 		<About />
 		<Experience data={experiences} />
@@ -26,6 +28,6 @@ const { works, experiences } = DataDetector.detect(lang);
 		<Stack />
 		<Training />
 		<Contact />
-		<Footer />
 	</main>
+	<Footer />
 </Layout>

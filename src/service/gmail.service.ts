@@ -12,16 +12,10 @@ export class GmailService {
             message: message,
         };
 
-        try {
-            const response = await emailjs.send(serviceId, templateId, params, publicKey);
-            if (response.status === 200) {
-                alert('Correo enviado con éxito');
-            } else {
-                alert('Ocurrió un error al enviar el correo');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al enviar el correo');
+        // el formulario muestra el resultado; aquí solo se propaga el error
+        const response = await emailjs.send(serviceId, templateId, params, publicKey);
+        if (response.status !== 200) {
+            throw new Error(`EmailJS respondió ${response.status}`);
         }
     }
 }
