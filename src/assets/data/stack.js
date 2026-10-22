@@ -5,7 +5,7 @@ export const stack = [
     { key: "stack.architecture", items: ["Hexagonal", { es: "Microservicios", en: "Microservices" }, { es: "Por capas", en: "Layered" }, "MVC", { es: "Monolito Modular", en: "Modular Monolith" }, "DDD", "SOLID", "Clean Code"] },
     { key: "stack.cloud", items: ["Blob Storage", "Key Vault", "App Service", "Azure Database for MySQL", "Functions", "Container Apps", "Azure SQL"] },
     { key: "stack.security", items: ["Okta", "CyberArk", "Auth0", "RBAC", "OWASP Top 10", "Checkmarx"] },
-    { key: "stack.databases", items: ["SQL Server", "Azure SQL", "MySQL", "PostgreSQL", "MongoDB", "DynamoDB", "Supabase"] },
+    { key: "stack.databases", items: ["SQL Server", "Azure SQL", "MySQL", "PostgreSQL", "MongoDB", "DynamoDB", "Supabase", "Oracle Db"] },
     { key: "stack.devops", items: ["Azure DevOps", "CI/CD", "Docker", "Git", "GitHub", "Linux (bash)", "Postman"] },
     { key: "stack.frontend", items: ["JavaScript", "React", "Next.js", "Angular", "HTML", "CSS", "Bootstrap"] },
     { key: "stack.data", items: ["SSIS", "Pandas", "Power BI"] },
