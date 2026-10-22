@@ -63,7 +63,7 @@ Fuente de verdad sobre las tecnologías y herramientas que domina el candidato. 
 ## Prioridades para sector bancario/fintech
 
 Cuando el contexto sea una postulación a banca o fintech, destacar primero:
-1. **.NET / .NET Core** — stack principal usado en el cliente real (Western Union).
+1. **.NET / .NET Core** — stack principal usado en el Cliente (Western Union).
 2. **Microsoft Azure** — cloud computing corporativo, estándar en banca.
 3. **Bases de datos relacionales** (SQL Server, MySQL) — más relevantes que MongoDB en contextos bancarios tradicionales.
 4. **OWASP Top 10** — directamente relacionado con la experiencia real de corrección de vulnerabilidades en Western Union (ver `professional-summary-specification`).

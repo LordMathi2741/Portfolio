@@ -10,7 +10,7 @@ export const works = [
     },
     {
         category: 'client',
-        context: 'Cliente real · UDEP',
+        context: 'Cliente · UDEP',
         title: 'Fondo de Becas Amigos UDEP — Plataforma de donaciones',
         description: 'Plataforma de donaciones con pagos en línea vía Niubiz, constancias de donación almacenadas en Azure Blob Storage, dashboard administrativo con autenticación Azure AD, envío de correos con Microsoft Graph y reCAPTCHA.',
         badges: ['ASP.NET Core 8', 'Clean Architecture', 'Next.js', 'Oracle', 'Niubiz', 'Azure', 'xUnit'],
@@ -19,7 +19,7 @@ export const works = [
     },
     {
         category: 'client',
-        context: 'Cliente real · YAVA S.A.C.',
+        context: 'Cliente · YAVA S.A.C.',
         title: 'YAVA — Sitio web corporativo',
         description: 'Sitio corporativo para una empresa de transporte y distribución de combustible con 39 años en el mercado: servicios, clientes, políticas y formulario de contacto con Azure Functions, desplegado en Cloudflare con análisis CodeQL en el pipeline.',
         badges: ['Astro', 'TypeScript', 'Tailwind CSS', 'Cloudflare Workers', 'Azure Functions', 'GitHub Actions'],
@@ -28,7 +28,7 @@ export const works = [
     },
     {
         category: 'client',
-        context: 'Cliente real · CORSERSAC S.A.C.',
+        context: 'Cliente · CORSERSAC S.A.C.',
         title: 'Validación y control de facturas',
         description: 'Sistema de validación y control de facturas para un organismo de inspección con acreditación ISO 17020, con gestión de estados y gráficos de consumo.',
         badges: ['C#', '.NET', 'Vue.js', 'MySQL', 'Docker', 'Clean Architecture'],
@@ -36,7 +36,7 @@ export const works = [
     },
     {
         category: 'client',
-        context: 'Cliente real · HIPERFAST S.A.C.',
+        context: 'Cliente · HIPERFAST S.A.C.',
         title: 'Validación de reportes',
         description: 'Sistema de validación de certificados de conformidad para un organismo con acreditación ISO 17020, con gestión administrativa de clientes.',
         badges: ['C#', '.NET', 'Vue.js', 'Node.js', 'MySQL'],

@@ -10,7 +10,7 @@ export const worksEn = [
     },
     {
         category: 'client',
-        context: 'Real client · UDEP',
+        context: 'Client · UDEP',
         title: 'Amigos UDEP Scholarship Fund — Donation platform',
         description: 'Donation platform with online payments through Niubiz, donation certificates stored in Azure Blob Storage, an admin dashboard with Azure AD authentication, email delivery via Microsoft Graph and reCAPTCHA.',
         badges: ['ASP.NET Core 8', 'Clean Architecture', 'Next.js', 'Oracle', 'Niubiz', 'Azure', 'xUnit'],
@@ -19,7 +19,7 @@ export const worksEn = [
     },
     {
         category: 'client',
-        context: 'Real client · YAVA S.A.C.',
+        context: 'Client · YAVA S.A.C.',
         title: 'YAVA — Corporate website',
         description: 'Corporate site for a fuel transport and distribution company with 39 years in the market: services, clients, policies and a contact form backed by Azure Functions, deployed on Cloudflare with CodeQL analysis in the pipeline.',
         badges: ['Astro', 'TypeScript', 'Tailwind CSS', 'Cloudflare Workers', 'Azure Functions', 'GitHub Actions'],
@@ -28,7 +28,7 @@ export const worksEn = [
     },
     {
         category: 'client',
-        context: 'Real client · HIPERFAST S.A.C.',
+        context: 'Client · HIPERFAST S.A.C.',
         title: 'Invoice Validation and Control',
         description: 'Invoice validation and control system for an inspection body with ISO 17020 accreditation, featuring state management and consumption charts.',
         badges: ['C#', '.NET', 'Vue.js', 'MySQL', 'Docker', 'Clean Architecture'],
@@ -36,7 +36,7 @@ export const worksEn = [
     },
     {
         category: 'client',
-        context: 'Real client · CORSERSAC S.A.C.',
+        context: 'Client · CORSERSAC S.A.C.',
         title: 'Report Validation',
         description: 'Certificate of conformity validation system for an ISO 17020 accredited body, with customer management features.',
         badges: ['C#', '.NET', 'Vue.js', 'Node.js', 'MySQL'],

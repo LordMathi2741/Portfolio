@@ -13,8 +13,8 @@ Fuente de verdad sobre los proyectos personales, académicos y de hackathon del 
 
 | Proyecto | Contexto | Stack principal | Enlace |
 |---|---|---|---|
-| Validación de reportes | Freelance / cliente real (OI-044) | C#, .NET, Vue.js, Node.js, MySQL | [Demo](http://38.25.38.94:5173/) |
-| Validación y control de facturas | Freelance / cliente real (OI-044) | C#, .NET, Vue.js, Node.js, MySQL, Docker | [GitHub](https://github.com/Corsersac-Consultant-Platform) |
+| Validación de reportes | Freelance / Cliente (OI-044) | C#, .NET, Vue.js, Node.js, MySQL | [Demo](http://38.25.38.94:5173/) |
+| Validación y control de facturas | Freelance / Cliente (OI-044) | C#, .NET, Vue.js, Node.js, MySQL, Docker | [GitHub](https://github.com/Corsersac-Consultant-Platform) |
 | E-commerce con recomendaciones personalizadas | Curso UPC — Complejidad Algorítmica | Python, Flask, FastAPI, MySQL | [GitHub](https://github.com/orgs/MyFavoriteProduct-Organization/repositories) |
 | App de alquiler de espacios para eventos | Curso UPC — Apps para Dispositivos Móviles | Flutter, C#/.NET, FireAuth, PayPal, SQLite, MySQL | [GitHub](https://github.com/orgs/Applications-for-Mobile-Devices-WX63/repositories) |
 | Plataforma de educación a distancia | Hackathon — EducHack 2024 (UPC) | Next.js, NestJS, PostgreSQL, Daily.co | No disponible (confidencial) |
@@ -28,7 +28,7 @@ Detalle completo de cada proyecto (descripción, arquitectura, funcionalidades e
 
 ## Categorización
 
-- **Proyectos con cliente real:** Validación de reportes, Validación y control de facturas (organismo de inspección ISO 17020, OI-044), Control de asistencia con reconocimiento facial (freelance) — mayor peso para mostrar experiencia profesional real, no solo académica.
+- **Proyectos con Cliente:** Validación de reportes, Validación y control de facturas (organismo de inspección ISO 17020, OI-044), Control de asistencia con reconocimiento facial (freelance) — mayor peso para mostrar experiencia profesional real, no solo académica.
 - **Hackathon:** Plataforma de educación a distancia (EducHack 2024).
 - **Cursos UPC:** E-commerce con recomendaciones, App de alquiler de espacios, Colaboración entre Artistas y Escritores, EcoGuardian.
 - **Proyecto propio / IA aplicada:** Vivlo — integra Inteligencia Artificial (AWS Bedrock) con enfoque en salud digital.
@@ -46,7 +46,7 @@ Usa **título + 1-2 líneas de descripción resumida** (no la descripción compl
 Usa la descripción completa tal como está en `references/proyectos-detallados.md`, sin resumir.
 
 ### 3. CV / PDF
-Incluye solo los 2-3 proyectos más relevantes según la vacante (prioriza los de cliente real y los de mayor complejidad arquitectónica), con una línea de descripción + stack. No listar los 6 en un CV — satura el documento.
+Incluye solo los 2-3 proyectos más relevantes según la vacante (prioriza los de Cliente y los de mayor complejidad arquitectónica), con una línea de descripción + stack. No listar los 6 en un CV — satura el documento.
 
 ### 4. Cover letter
 Menciona como máximo 1 proyecto, el más alineado a la vacante específica (pregunta al usuario por la vacante si no la mencionó).
@@ -56,7 +56,7 @@ Menciona como máximo 1 proyecto, el más alineado a la vacante específica (pre
 Cuando el contexto sea una postulación a banca o fintech, ordena así:
 1. **ScamShield (tesis)** — el proyecto más alineado a banca/fintech de todo el portafolio: detección de fraude/estafas mediante Machine Learning (Machine Learning) y NLP (fine-tuning de DistilBERT), un dominio directamente aplicable a prevención de fraude financiero. Siempre priorizar este proyecto cuando la vacante mencione fraude, riesgo, seguridad transaccional o IA aplicada.
 2. **Validación y control de facturas** — maneja pagos, estados financieros, gráficos de consumo; usa Docker (relevante para infraestructura en la nube/Azure).
-3. **Validación de reportes** — cliente real con acreditación, gestión administrativa de consumo.
+3. **Validación de reportes** — Cliente con acreditación, gestión administrativa de consumo.
 4. **App de alquiler de espacios para eventos** — arquitectura robusta (CQRS + DDD), integra pagos (PayPal), autenticación externa (FireAuth) y pruebas unitarias (XUnit); útil para mostrar madurez técnica aunque el dominio no sea financiero.
 5. **Vivlo** — aunque no es de dominio bancario, es relevante para mostrar el interés del candidato en IA/ciencia de datos (usa AWS Bedrock) combinado con su stack fuerte (.NET Core, Flutter); destacarlo si la vacante valora IA aplicada o servicios cloud serverless (Lambda, API Gateway).
 6. **EcoGuardian** — proyecto de mayor envergadura y duración (varios ciclos académicos, equipo de 7 personas, metodología ágil con entregables TB1/TB2/TF), útil para mostrar experiencia en proyectos largos, trabajo en equipo y IoT; mencionar si la vacante valora escalabilidad de sistemas o experiencia en equipos grandes.
