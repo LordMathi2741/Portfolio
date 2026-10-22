@@ -1,5 +1,6 @@
 export const works = [
     {
+        category: 'thesis',
         context: 'Tesis · BTSym 2026',
         title: 'ScamShield — Extensión de navegador para mitigar la probabilidad de riesgo de estafas en compras digitales',
         description: 'Solución distribuida de prevención de fraude en e-commerce que estima la probabilidad de riesgo de estafa con Machine Learning y NLP (fine-tuning de DistilBERT con PyTorch/Transformers), desplegada en Azure.',
@@ -8,6 +9,7 @@ export const works = [
         url: 'https://scamshield.ryzeon.dev/'
     },
     {
+        category: 'client',
         context: 'Cliente real · UDEP',
         title: 'Fondo de Becas Amigos UDEP — Plataforma de donaciones',
         description: 'Plataforma de donaciones con pagos en línea vía Niubiz, constancias de donación almacenadas en Azure Blob Storage, dashboard administrativo con autenticación Azure AD, envío de correos con Microsoft Graph y reCAPTCHA.',
@@ -16,6 +18,7 @@ export const works = [
         url: 'https://fondoimpacto-donaciones.udep.edu.pe/'
     },
     {
+        category: 'client',
         context: 'Cliente real · YAVA S.A.C.',
         title: 'YAVA — Sitio web corporativo',
         description: 'Sitio corporativo para una empresa de transporte y distribución de combustible con 39 años en el mercado: servicios, clientes, políticas y formulario de contacto con Azure Functions, desplegado en Cloudflare con análisis CodeQL en el pipeline.',
@@ -24,6 +27,7 @@ export const works = [
         url: 'https://www.yava.com.pe/'
     },
     {
+        category: 'client',
         context: 'Cliente real · ISO 17020',
         title: 'Validación y control de facturas',
         description: 'Sistema de validación y control de facturas para un organismo de inspección con acreditación ISO 17020, con gestión de estados y gráficos de consumo.',
@@ -31,6 +35,7 @@ export const works = [
         image: '/images/invoice-validator.jpeg',
     },
     {
+        category: 'client',
         context: 'Cliente real · ISO 17020',
         title: 'Validación de reportes',
         description: 'Sistema de validación de certificados de conformidad para un organismo con acreditación ISO 17020, con gestión administrativa de clientes.',
@@ -39,6 +44,7 @@ export const works = [
         url: 'http://38.25.38.94:5173/'
     },
     {
+        category: 'academic',
         context: 'Curso UPC',
         title: 'App de alquiler de espacios para eventos',
         description: 'Plataforma con gestión de reservas, integración de pagos y sistema de reseñas. Arquitectura robusta enfocada en la escalabilidad del negocio.',
@@ -46,6 +52,7 @@ export const works = [
         image: '/images/alquilafacil.jpeg',
     },
     {
+        category: 'academic',
         context: 'Curso UPC · Diseño de Experimentos',
         title: 'MoviRent — Alquiler de scooters eléctricos',
         description: 'Plataforma que conecta a dueños de scooters eléctricos con arrendatarios, construida con Experiment-Driven Development: hipótesis, experiment cards, pruebas A/B y BDD con Gherkin.',
@@ -53,6 +60,7 @@ export const works = [
         image: '/images/movirent.jpg',
     },
     {
+        category: 'personal',
         context: 'Proyecto propio',
         title: 'Vivlo',
         description: 'Asistente de Inteligencia Artificial enfocado en el acompañamiento y cuidado de pacientes con diabetes, utilizando modelos fundacionales en la nube.',
@@ -61,6 +69,7 @@ export const works = [
         url: '#'
     },
     {
+        category: 'academic',
         context: 'Curso UPC · equipo de 7',
         title: 'EcoGuardian',
         description: 'Solución IoT para monitorización agrícola con alertas en tiempo real, recomendaciones personalizadas y arquitectura distribuida.',

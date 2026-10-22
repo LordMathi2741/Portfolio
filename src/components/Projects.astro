@@ -5,6 +5,11 @@ const { data } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// orden fijo de los filtros; solo se muestran categorías con al menos un proyecto
+const categories = ['client', 'thesis', 'academic', 'personal']
+    .map((key) => ({ key, count: data.filter((item) => item.category === key).length }))
+    .filter((category) => category.count > 0);
 ---
 
 <section id="work-section" aria-labelledby="works-title">
@@ -14,9 +19,20 @@ const t = useTranslations(lang);
         <p>{t('works.subtitle')}</p>
     </div>
 
-    <ul class="projects">
+    <div class="filters" role="group" aria-label={t('works.filter.label')}>
+        <button type="button" class="pill" data-filter="all" aria-pressed="true">
+            {t('works.filter.all')} <span class="pill-count">{data.length}</span>
+        </button>
+        {categories.map((category) => (
+            <button type="button" class="pill" data-filter={category.key} aria-pressed="false">
+                {t(`works.filter.${category.key}`)} <span class="pill-count">{category.count}</span>
+            </button>
+        ))}
+    </div>
+
+    <ul class="projects" id="projects-list">
         {data.map((item) => (
-            <li class="card project">
+            <li class="card project" data-category={item.category}>
                 <div class="project-image">
                     <img src={item.image} alt={item.title} loading="lazy" />
                     {item.context && <span class="project-context">{item.context}</span>}
@@ -39,7 +55,78 @@ const t = useTranslations(lang);
     </ul>
 </section>
 
+<script>
+    const pills = document.querySelectorAll<HTMLButtonElement>('#work-section .pill');
+    const projects = document.querySelectorAll<HTMLElement>('#projects-list .project');
+
+    pills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+            const filter = pill.dataset.filter;
+            pills.forEach((p) => p.setAttribute('aria-pressed', String(p === pill)));
+            projects.forEach((project) => {
+                project.hidden = filter !== 'all' && project.dataset.category !== filter;
+            });
+        });
+    });
+</script>
+
 <style>
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 40px;
+        padding: 6px 16px;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        background-color: var(--color-surface);
+        color: var(--color-text);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .pill:hover {
+        border-color: var(--color-accent);
+    }
+
+    .pill[aria-pressed="true"] {
+        background-color: var(--color-accent-strong);
+        border-color: var(--color-accent-strong);
+        color: white;
+    }
+
+    .pill-count {
+        padding: 0 7px;
+        border-radius: 999px;
+        background-color: var(--color-accent-bg);
+        color: var(--color-accent-strong);
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    :global([data-theme="dark"]) .pill-count {
+        color: var(--color-accent);
+    }
+
+    .pill[aria-pressed="true"] .pill-count {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .project[hidden] {
+        display: none;
+    }
+
     .projects {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
