@@ -28,7 +28,7 @@ export const works = [
     },
     {
         category: 'client',
-        context: 'Cliente real · ISO 17020',
+        context: 'Cliente real · CORSERSAC S.A.C.',
         title: 'Validación y control de facturas',
         description: 'Sistema de validación y control de facturas para un organismo de inspección con acreditación ISO 17020, con gestión de estados y gráficos de consumo.',
         badges: ['C#', '.NET', 'Vue.js', 'MySQL', 'Docker', 'Clean Architecture'],
@@ -36,7 +36,7 @@ export const works = [
     },
     {
         category: 'client',
-        context: 'Cliente real · ISO 17020',
+        context: 'Cliente real · HIPERFAST S.A.C.',
         title: 'Validación de reportes',
         description: 'Sistema de validación de certificados de conformidad para un organismo con acreditación ISO 17020, con gestión administrativa de clientes.',
         badges: ['C#', '.NET', 'Vue.js', 'Node.js', 'MySQL'],

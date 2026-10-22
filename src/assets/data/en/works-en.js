@@ -28,7 +28,7 @@ export const worksEn = [
     },
     {
         category: 'client',
-        context: 'Real client · ISO 17020',
+        context: 'Real client · HIPERFAST S.A.C.',
         title: 'Invoice Validation and Control',
         description: 'Invoice validation and control system for an inspection body with ISO 17020 accreditation, featuring state management and consumption charts.',
         badges: ['C#', '.NET', 'Vue.js', 'MySQL', 'Docker', 'Clean Architecture'],
@@ -36,7 +36,7 @@ export const worksEn = [
     },
     {
         category: 'client',
-        context: 'Real client · ISO 17020',
+        context: 'Real client · CORSERSAC S.A.C.',
         title: 'Report Validation',
         description: 'Certificate of conformity validation system for an ISO 17020 accredited body, with customer management features.',
         badges: ['C#', '.NET', 'Vue.js', 'Node.js', 'MySQL'],
