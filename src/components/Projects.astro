@@ -10,6 +10,10 @@ const t = useTranslations(lang);
 const categories = ['client', 'thesis', 'academic', 'personal']
     .map((key) => ({ key, count: data.filter((item) => item.category === key).length }))
     .filter((category) => category.count > 0);
+
+// destacado + 6 proyectos = dos filas completas; el resto queda detrás de "Ver más"
+const INITIAL_VISIBLE = 7;
+const extraCount = Math.max(data.length - INITIAL_VISIBLE, 0);
 ---
 
 <section id="work-section" aria-labelledby="works-title">
@@ -33,10 +37,22 @@ const categories = ['client', 'thesis', 'academic', 'personal']
     <p class="sr-only" id="projects-status" aria-live="polite" data-template={t('works.filter.status')}></p>
 
     <ul class="projects" id="projects-list">
-        {data.map((item) => (
-            <li class:list={['card', 'project', { 'project--featured': item.featured }]} data-category={item.category}>
+        {data.map((item, index) => (
+            <li
+                class:list={['card', 'project', { 'project--featured': item.featured }]}
+                data-category={item.category}
+                data-extra={index >= INITIAL_VISIBLE ? '' : undefined}
+                hidden={index >= INITIAL_VISIBLE}
+                tabindex="-1"
+            >
                 <div class="project-image">
-                    <img src={item.image} alt={item.title} loading="lazy" />
+                    {item.image ? (
+                        <img src={item.image} alt={item.title} loading="lazy" />
+                    ) : (
+                        <div class="project-cover" aria-hidden="true">
+                            <span class="material-icons">{item.icon ?? 'code'}</span>
+                        </div>
+                    )}
                     {item.context && <span class="project-context">{item.context}</span>}
                 </div>
                 <div class="project-body">
@@ -56,24 +72,70 @@ const categories = ['client', 'thesis', 'academic', 'personal']
             </li>
         ))}
     </ul>
+
+    {extraCount > 0 && (
+        <div class="more">
+            <button
+                type="button"
+                class="btn btn--ghost"
+                id="projects-more"
+                aria-controls="projects-list"
+                aria-expanded="false"
+                data-more={t('works.more').replace('{count}', String(extraCount))}
+                data-less={t('works.less')}
+            >
+                <span class="more-label">{t('works.more').replace('{count}', String(extraCount))}</span>
+                <span class="material-icons" aria-hidden="true">expand_more</span>
+            </button>
+        </div>
+    )}
 </section>
 
 <script>
     const pills = document.querySelectorAll<HTMLButtonElement>('#work-section .pill');
     const projects = document.querySelectorAll<HTMLElement>('#projects-list .project');
     const status = document.getElementById('projects-status')!;
+    const more = document.getElementById('projects-more') as HTMLButtonElement | null;
+    const moreWrap = more?.parentElement;
+
+    let filter = 'all';
+    let expanded = false;
+
+    function render() {
+        let visible = 0;
+        projects.forEach((project) => {
+            const inFilter = filter === 'all' || project.dataset.category === filter;
+            // el límite solo aplica a "Todos": al filtrar se ve la categoría completa
+            const collapsed = filter === 'all' && !expanded && project.hasAttribute('data-extra');
+            project.hidden = !inFilter || collapsed;
+            if (!project.hidden) visible++;
+        });
+        if (more && moreWrap) {
+            moreWrap.hidden = filter !== 'all';
+            more.setAttribute('aria-expanded', String(expanded));
+            more.querySelector('.more-label')!.textContent = expanded ? more.dataset.less! : more.dataset.more!;
+        }
+        return visible;
+    }
 
     pills.forEach((pill) => {
         pill.addEventListener('click', () => {
-            const filter = pill.dataset.filter;
+            filter = pill.dataset.filter!;
             pills.forEach((p) => p.setAttribute('aria-pressed', String(p === pill)));
-            let visible = 0;
-            projects.forEach((project) => {
-                project.hidden = filter !== 'all' && project.dataset.category !== filter;
-                if (!project.hidden) visible++;
-            });
+            const visible = render();
             status.textContent = status.dataset.template!.replace('{count}', String(visible));
         });
+    });
+
+    more?.addEventListener('click', () => {
+        expanded = !expanded;
+        render();
+        if (expanded) {
+            // lleva el foco al primer proyecto revelado para que teclado y lector de pantalla continúen ahí
+            document.querySelector<HTMLElement>('#projects-list .project[data-extra]')?.focus();
+        } else {
+            document.getElementById('work-section')!.scrollIntoView({ block: 'start' });
+        }
     });
 </script>
 
@@ -130,8 +192,28 @@ const categories = ['client', 'thesis', 'academic', 'personal']
         color: white;
     }
 
-    .project[hidden] {
+    .project[hidden],
+    .more[hidden] {
         display: none;
+    }
+
+    .project:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+    }
+
+    .more {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .more .btn {
+        gap: 0.35rem;
+    }
+
+    #projects-more[aria-expanded="true"] .material-icons {
+        transform: rotate(180deg);
     }
 
     .projects {
@@ -200,6 +282,25 @@ const categories = ['client', 'thesis', 'academic', 'personal']
         height: 100%;
         object-fit: cover;
         display: block;
+    }
+
+    .project-cover {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--color-accent-bg), transparent 70%), var(--color-surface);
+    }
+
+    .project-cover .material-icons {
+        color: var(--color-accent-strong);
+        font-size: 4rem;
+        opacity: 0.85;
+    }
+
+    :global([data-theme="dark"]) .project-cover .material-icons {
+        color: var(--color-accent);
     }
 
     .project-context {
