@@ -45,8 +45,24 @@ export const worksEn = [
         url: 'http://38.25.38.94:5173/'
     },
     {
+        category: 'client',
+        context: 'Freelance',
+        title: 'Maintenance Sheets — Activity logging and automated reports',
+        description: 'Mobile app that replaces the paper maintenance field sheet: technicians look up equipment by code, record the person in charge, a description and photos, and a PDF is generated and stored in Google Drive, with an offline queue. I also built a Make automation, integrating the Google Drive and Google Sheets APIs, that fills in the information daily to produce valuable reports from the activity records.',
+        badges: ['Flutter', 'BLoC', 'Clean Architecture', 'Google Apps Script', 'Google Drive API', 'Google Sheets API', 'Make'],
+        image: '/images/fichas-mantenimiento.jpg',
+    },
+    {
+        category: 'client',
+        context: 'Freelance',
+        title: 'Attendance control with facial recognition',
+        description: 'Mobile app that records employee attendance with on-device facial recognition (ML Kit detection and MobileFaceNet embeddings on TensorFlow Lite) and a FastAPI REST API with MySQL for registration and history, covered by unit, integration and API tests.',
+        badges: ['Flutter', 'BLoC', 'TensorFlow Lite', 'ML Kit', 'FastAPI', 'SQLAlchemy', 'MySQL', 'Docker', 'Pytest'],
+        image: '/images/control-asistencia.jpg',
+    },
+    {
         category: 'academic',
-        context: 'UPC course',
+        context: 'UPC course · Mobile Applications',
         title: 'Event Space Rental App',
         description: 'Platform with reservation management, payment integration, and a review system. Robust architecture focused on business scalability.',
         badges: ['Flutter', 'C#', 'Firebase', 'PayPal', 'CQRS', 'DDD'],

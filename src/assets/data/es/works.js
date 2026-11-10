@@ -45,8 +45,24 @@ export const works = [
         url: 'http://38.25.38.94:5173/'
     },
     {
+        category: 'client',
+        context: 'Freelance',
+        title: 'Fichas de Mantenimiento — Registro de actividades y reportes automatizados',
+        description: 'App móvil que reemplaza la hoja de campo de mantenimiento: el técnico busca el equipo por código, registra responsable, descripción y fotos, y se genera un PDF que se guarda en Google Drive, con cola sin conexión. Además automaticé en Make, integrando las APIs de Google Drive y Google Sheets, el llenado diario de la información para generar reportes de valor a partir de los registros de actividades.',
+        badges: ['Flutter', 'BLoC', 'Clean Architecture', 'Google Apps Script', 'Google Drive API', 'Google Sheets API', 'Make'],
+        image: '/images/fichas-mantenimiento.jpg',
+    },
+    {
+        category: 'client',
+        context: 'Freelance',
+        title: 'Control de asistencia con reconocimiento facial',
+        description: 'App móvil que registra la asistencia de empleados con reconocimiento facial en el dispositivo (detección con ML Kit y embeddings con MobileFaceNet en TensorFlow Lite) y una API REST en FastAPI con MySQL para el registro e historial, cubierta con pruebas unitarias, de integración y de API.',
+        badges: ['Flutter', 'BLoC', 'TensorFlow Lite', 'ML Kit', 'FastAPI', 'SQLAlchemy', 'MySQL', 'Docker', 'Pytest'],
+        image: '/images/control-asistencia.jpg',
+    },
+    {
         category: 'academic',
-        context: 'Curso UPC',
+        context: 'Curso UPC · Aplicaciones Móviles',
         title: 'App de alquiler de espacios para eventos',
         description: 'Plataforma con gestión de reservas, integración de pagos y sistema de reseñas. Arquitectura robusta enfocada en la escalabilidad del negocio.',
         badges: ['Flutter', 'C#', 'Firebase', 'PayPal', 'CQRS', 'DDD'],
