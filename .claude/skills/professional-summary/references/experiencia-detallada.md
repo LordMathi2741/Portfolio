@@ -4,8 +4,8 @@ Fuente de verdad para toda redacción de experiencia laboral. Copiar/adaptar bul
 
 ---
 
-## Practicante de Desarrollo de Software
-**ITSIGHT CONSULTING** | 02/2025 – Actualidad | Cliente: Western Union
+## Ingeniero de Software Junior
+**Western Union** (asignado por ITSIGHT Consulting) | 02/2025 – Actualidad
 
 ### Responsabilidades
 - Desarrollé, migré y mantuve 4 aplicaciones web usando C#, ASP.NET Core, React y SQL Server.

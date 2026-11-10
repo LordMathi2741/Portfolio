@@ -1,7 +1,7 @@
 export const experiencesEn = [
     {
         title: "Junior Software Engineer",
-        company: "ITSIGHT Consulting (client: Western Union)",
+        company: "Western Union (assigned through ITSIGHT Consulting)",
         location: "Lima, Peru",
         date: "Feb 2025 - Present",
         tags: ["C#", "ASP.NET Core (.NET 8)", "SQL Server", "SSIS", "Azure", "Okta", "CyberArk", "RBAC", "Checkmarx", "Hexagonal Architecture"],
