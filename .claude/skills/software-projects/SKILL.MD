@@ -21,14 +21,15 @@ Fuente de verdad sobre los proyectos personales, académicos y de hackathon del 
 | Colaboración entre Artistas y Escritores | Curso UPC — Desarrollo de Apps Open Source | Spring Boot, Angular, MySQL | [GitHub](https://github.com/orgs/Open-Source-SW54-Group-3-ArtCollab/repositories) |
 | EcoGuardian | Curso UPC — Desarrollo de Soluciones IoT (proyecto multi-ciclo, estilo startup) | ASP.NET Core, Vue.js, Flutter, IoT (sensores), DDD, Stripe, Docker | [Landing Page](https://sage-granita-e4aafb.netlify.app/) · [App Web](https://ecoguardian-tf.vercel.app/) · [Repo](https://github.com/WemadeRemastered/EcoGuardian-Report) |
 | Vivlo | Proyecto personal / lado a lado con la carrera | Flutter, .NET Core, AWS (API Gateway, Lambda, Bedrock) | Pendiente de agregar |
-| Control de asistencia con reconocimiento facial | Freelance | FastAPI, Flutter, MobileNet, MySQL | No disponible |
+| Control de asistencia con reconocimiento facial | Freelance | Flutter, TensorFlow Lite (MobileFaceNet), ML Kit, FastAPI, MySQL | No disponible |
+| Fichas de Mantenimiento | Freelance | Flutter, Google Apps Script, Google Drive/Sheets API, Make | No disponible |
 | ScamShield — Detección de estafas en compras digitales | Tesis de pregrado | .NET Core, Next.js, Machine Learning (Machine Learning, Scikit-Learn), Fine-Tuning (DistilBERT, Transformers) | [Demo](https://scamshield.ryzeon.dev/) |
 
 Detalle completo de cada proyecto (descripción, arquitectura, funcionalidades e imagen) en `references/proyectos-detallados.md`.
 
 ## Categorización
 
-- **Proyectos con Cliente:** Validación de reportes, Validación y control de facturas (organismo de inspección ISO 17020, OI-044), Control de asistencia con reconocimiento facial (freelance) — mayor peso para mostrar experiencia profesional real, no solo académica.
+- **Proyectos con Cliente:** Validación de reportes, Validación y control de facturas (organismo de inspección ISO 17020, OI-044), Control de asistencia con reconocimiento facial (freelance), Fichas de Mantenimiento (freelance) — mayor peso para mostrar experiencia profesional real, no solo académica.
 - **Hackathon:** Plataforma de educación a distancia (EducHack 2024).
 - **Cursos UPC:** E-commerce con recomendaciones, App de alquiler de espacios, Colaboración entre Artistas y Escritores, EcoGuardian.
 - **Proyecto propio / IA aplicada:** Vivlo — integra Inteligencia Artificial (AWS Bedrock) con enfoque en salud digital.

@@ -119,13 +119,31 @@ Vivlo es un asistente de Inteligencia Artificial orientado al acompañamiento de
 
 ## Control de asistencia con reconocimiento facial
 **Contexto:** Proyecto freelance
-**Enlace:** No disponible (repositorio privado / sin publicar)
+**Repositorios locales:** `control_asistencia` (app Flutter) y `control_asistencia_api` (API FastAPI) — se presentan como un solo proyecto
+**Enlace:** No disponible (repositorio privado / sin publicar) — no mencionar ningún enlace.
 
 **Descripción:**
-Aplicación móvil para el control de asistencia mediante reconocimiento facial.
+Aplicación móvil para el control de asistencia de empleados mediante reconocimiento facial en el dispositivo: detección de rostro con Google ML Kit y generación de embeddings con MobileFaceNet (TensorFlow Lite), comparando por distancia euclidiana contra los rostros enrolados (guardados localmente en SQLite). La asistencia se registra en una API REST (FastAPI + SQLAlchemy + MySQL) con endpoints de registro, asistencias del día e historial protegido por API key.
 
-**Stack:** FastAPI (backend), Flutter (móvil), MobileNet (modelo de reconocimiento facial), MySQL (persistencia de datos)
-**Nota:** Faltan detalles adicionales (funcionalidades específicas, arquitectura, cliente/contexto del freelance) — completar cuando el candidato los proporcione, sin inventarlos mientras tanto. No mencionar ningún enlace para este proyecto ya que no existe uno disponible.
+**Stack:** Flutter (BLoC, go_router), TensorFlow Lite, Google ML Kit, SQLite; FastAPI, SQLAlchemy, MySQL 8, Docker Compose, Pytest
+**Arquitectura:** App por features (domain/data/presentation); API en capas (application / infrastructure / interface)
+**Pruebas:** unitarias, de integración con MySQL y de API (Pytest)
+**Nota:** La notificación por Gmail de la app es un stub; no presentarla como funcionalidad terminada.
+
+---
+
+## Fichas de Mantenimiento
+**Contexto:** Proyecto freelance para una empresa (carpeta local `Documents/Fichas de Mantenimiento`)
+**Enlace:** No disponible
+
+**Descripción:**
+App móvil (Flutter, Android/iOS) que reemplaza la hoja de campo de registro de actividades de mantenimiento. El técnico busca el equipo por código, completa responsable, descripción y fotos; al guardar se genera un PDF que se sube a Google Drive (`/Mantenimiento/<CODIGO>/AAAA-MM-DD_HHmm_CODIGO.pdf`) a través de un servicio intermedio en Google Apps Script (valida API key, nombre, tipo y tamaño). Sin login; catálogo de equipos sincronizado desde Drive y cola de PDFs cuando no hay señal.
+
+**Automatización en Make:** integración con las APIs de Google Drive y Google Sheets para el llenado automático diario de información, con el propósito de crear reportes de valor a partir de los registros de actividades.
+
+**Stack:** Flutter, BLoC, get_it, fpdart, sqflite, pdf, Google Apps Script, Google Drive API, Google Sheets API, Make
+**Arquitectura:** Clean Architecture por features (domain en Dart puro, data, presentation)
+**Pruebas:** unitarias, BLoC, widget e integración
 
 ---
 
