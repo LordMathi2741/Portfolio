@@ -1,5 +1,6 @@
 ---
 import languages from "../assets/data/languages.js";
+import { CV_URL } from "../config/contact";
 import { getLangFromUrl, useTranslations } from "../i18n/util";
 
 const lang = getLangFromUrl(Astro.url);
@@ -23,7 +24,6 @@ const links = [
             {links.map((link, index) => (
                 <li>
                     <a href={link.href}>
-                        <span class="nav-index">{String(index + 1).padStart(2, '0')}</span>
                         {link.label}
                     </a>
                 </li>
@@ -38,15 +38,29 @@ const links = [
                     </option>
                 ))}
             </select>
+            <button
+                type="button"
+                class="icon-btn"
+                id="theme-toggle"
+                data-label-dark={t('nav.theme.dark')}
+                data-label-light={t('nav.theme.light')}
+                aria-label={t('nav.theme.dark')}
+            >
+                <span class="material-icons theme-icon--dark" aria-hidden="true">dark_mode</span>
+                <span class="material-icons theme-icon--light" aria-hidden="true">light_mode</span>
+            </button>
+            <a class="icon-btn" href={`/${lang}/terminal`} aria-label={t('terminal.link')} title={t('terminal.link')}>
+                <span class="material-icons" aria-hidden="true">terminal</span>
+            </a>
             <a
                 class="btn btn--primary download-btn"
-                href="https://drive.google.com/file/d/1Vro7Lj0prsPxSOnsj9Y6c3yIdpbk7XB1/view?usp=sharing"
+                href={CV_URL}
                 target="_blank"
                 rel="noopener"
             >
                 {t('download')}
             </a>
-            <button class="toggle-btn" id="nav-toggle" aria-label={t('nav.menu')} aria-expanded="false" aria-controls="nav-links">
+            <button class="icon-btn toggle-btn" id="nav-toggle" aria-label={t('nav.menu')} aria-expanded="false" aria-controls="nav-links">
                 <span class="material-icons" aria-hidden="true">menu</span>
             </button>
         </div>
@@ -57,6 +71,22 @@ const links = [
     const selectLang = document.getElementById('language-selector') as HTMLSelectElement;
     const toggle = document.getElementById('nav-toggle')!;
     const links = document.getElementById('nav-links')!;
+
+    const themeToggle = document.getElementById('theme-toggle')!;
+
+    function syncThemeButton() {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        themeToggle.setAttribute('aria-label', dark ? themeToggle.dataset.labelLight! : themeToggle.dataset.labelDark!);
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        else document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+        syncThemeButton();
+    });
+    syncThemeButton();
 
     selectLang.addEventListener('change', () => {
         const currentPath = window.location.pathname.split('/').slice(2).join('/');
@@ -163,8 +193,8 @@ const links = [
         background-color: var(--color-surface);
     }
 
-    .toggle-btn {
-        display: none;
+    .icon-btn {
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 44px;
@@ -173,7 +203,26 @@ const links = [
         border-radius: var(--radius-button);
         background-color: transparent;
         color: var(--color-text);
+        text-decoration: none;
         cursor: pointer;
+        transition: border-color 0.2s;
+    }
+
+    .icon-btn:hover {
+        border-color: var(--color-accent);
+    }
+
+    .theme-icon--light,
+    :global([data-theme="dark"]) .theme-icon--dark {
+        display: none;
+    }
+
+    :global([data-theme="dark"]) .theme-icon--light {
+        display: inline;
+    }
+
+    .toggle-btn {
+        display: none;
     }
 
     @media (max-width: 1024px) {

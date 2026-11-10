@@ -1,8 +1,11 @@
 ---
 import '/src/assets/styles/global.css';
-import { getLangFromUrl } from '../i18n/util';
+import { getLangFromUrl, useTranslations } from '../i18n/util';
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const title = t('meta.title');
+const description = t('meta.description');
 ---
 <!doctype html>
 <html lang={lang}>
@@ -14,29 +17,31 @@ const lang = getLangFromUrl(Astro.url);
 		<meta name="theme-color" content="#0A2540" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:creator" content="@lordmathi2741" />
-		<meta name="twitter:title" content="Mathias Jave Diaz · Software Engineer" />
-		<meta name="twitter:description" content="Mathias Jave Diaz — Software Engineer (Azure, .NET, React) orientado al sector financiero." />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content="https://mathiasjave.com/og-image.png" />
-		<meta property="og:title" content="Mathias Jave Diaz · Software Engineer" />
-		<meta property="og:description" content="Mathias Jave Diaz — Software Engineer (Azure, .NET, React) orientado al sector financiero." />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://mathiasjave.com/og-image.png" />
 		<meta property="og:url" content="https://mathiasjave.com" />
 		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={lang === 'es' ? 'es_PE' : 'en_US'} />
 		<meta property="og:site_name" content="Mathias Jave Diaz" />
-		<meta name="keywords" content="Mathias Jave Diaz, Software Engineer, Azure, .NET, React, Frontend, Backend, Fullstack, Developer, Portfolio" />
-		<meta name="description" content="Mathias Jave Diaz — Software Engineer (Azure, .NET, React) orientado al sector financiero." />
+		<meta name="keywords" content="Mathias Jave Diaz, Backend Developer, .NET, ASP.NET Core, C#, Azure, Fintech, SQL Server, Machine Learning, Portfolio" />
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/png" href="/icon.png" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>Mathias Jave Diaz · Software Engineer</title>
+		<title>{title}</title>
 		<script is:inline>
 			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
+				try {
+					const saved = localStorage.getItem('theme');
+					if (saved) return saved;
+				} catch {}
 				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 					return 'dark';
 				}
@@ -47,7 +52,7 @@ const lang = getLangFromUrl(Astro.url);
 			} else {
 				document.documentElement.setAttribute('data-theme', 'dark');
 			}
-			window.localStorage.setItem('theme', theme);
+
 		</script>
 	</head>
 	<body>
