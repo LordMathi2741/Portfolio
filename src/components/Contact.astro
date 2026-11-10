@@ -1,13 +1,17 @@
 ---
+import { GITHUB_URL, LINKEDIN_URL, WHATSAPP_NUMBER, whatsappUrl } from "../config/contact";
 import { getLangFromUrl, useTranslations } from "../i18n/util";
 import FormContact from "./FormContact";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+const whatsapp = whatsappUrl(t('contact.whatsapp.message'));
+
 const channels = [
-    { icon: "code", label: "GitHub", value: "LordMathi2741", href: "https://github.com/LordMathi2741" },
-    { icon: "work", label: "LinkedIn", value: "Mathias Alejandro Jave Diaz", href: "https://www.linkedin.com/in/mathias-alejandro-jave-diaz-68a364222/" },
+    ...(whatsapp ? [{ icon: "chat", label: "WhatsApp", value: t('contact.whatsapp'), href: whatsapp }] : []),
+    { icon: "work", label: "LinkedIn", value: "Mathias Alejandro Jave Diaz", href: LINKEDIN_URL },
+    { icon: "code", label: "GitHub", value: "LordMathi2741", href: GITHUB_URL },
 ];
 ---
 

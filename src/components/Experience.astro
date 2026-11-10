@@ -37,9 +37,12 @@ const t = useTranslations(lang);
                     )}
 
                     {item.responsibilities?.length > 0 && (
-                        <ul class="experience-list">
-                            {item.responsibilities.map((resp) => <li>{resp}</li>)}
-                        </ul>
+                        <details class="responsibilities" open={item.responsibilities.length <= 4}>
+                            <summary>{t('experience.responsibilities').replace('{count}', String(item.responsibilities.length))}</summary>
+                            <ul class="experience-list">
+                                {item.responsibilities.map((resp) => <li>{resp}</li>)}
+                            </ul>
+                        </details>
                     )}
 
                     {item.tags?.length > 0 && (
@@ -155,8 +158,25 @@ const t = useTranslations(lang);
         margin-bottom: 0.4rem;
     }
 
-    .experience-list {
+    .responsibilities {
         margin-bottom: 1.25rem;
+    }
+
+    .responsibilities summary {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--color-accent-strong);
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    :global([data-theme="dark"]) .responsibilities summary {
+        color: var(--color-accent);
+    }
+
+    .experience-list {
+        margin-top: 0.5rem;
         color: var(--color-text);
     }
 

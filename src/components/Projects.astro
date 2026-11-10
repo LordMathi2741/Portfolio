@@ -34,12 +34,13 @@ const categories = ['client', 'thesis', 'academic', 'personal']
 
     <ul class="projects" id="projects-list">
         {data.map((item) => (
-            <li class="card project" data-category={item.category}>
+            <li class:list={['card', 'project', { 'project--featured': item.featured }]} data-category={item.category}>
                 <div class="project-image">
                     <img src={item.image} alt={item.title} loading="lazy" />
                     {item.context && <span class="project-context">{item.context}</span>}
                 </div>
                 <div class="project-body">
+                    {item.featured && <span class="featured-label">{t('works.featured')}</span>}
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <ul class="badges">
@@ -154,6 +155,37 @@ const categories = ['client', 'thesis', 'academic', 'personal']
     }
 
 
+    .project--featured {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        border-color: var(--color-accent);
+    }
+
+    .project--featured .project-image {
+        aspect-ratio: auto;
+        min-height: 280px;
+        border-bottom: 0;
+        border-right: 1px solid var(--color-border);
+    }
+
+    .project--featured h3 {
+        font-size: 1.4rem;
+    }
+
+    .featured-label {
+        align-self: flex-start;
+        color: var(--color-accent-strong);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    :global([data-theme="dark"]) .featured-label {
+        color: var(--color-accent);
+    }
+
     .project-image {
         position: relative;
         aspect-ratio: 16 / 9;
@@ -229,6 +261,19 @@ const categories = ['client', 'thesis', 'academic', 'personal']
     @media (max-width: 1024px) {
         .projects {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        .project--featured {
+            display: flex;
+        }
+
+        .project--featured .project-image {
+            aspect-ratio: 16 / 9;
+            min-height: 0;
+            border-right: 0;
+            border-bottom: 1px solid var(--color-border);
         }
     }
 

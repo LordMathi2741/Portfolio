@@ -2,7 +2,8 @@ export const works = [
     {
         category: 'thesis',
         context: 'Tesis · BTSym 2026',
-        title: 'ScamShield — Extensión de navegador para mitigar la probabilidad de riesgo de estafas en compras digitales',
+        title: 'ScamShield — Prevención de estafas en compras digitales con ML y NLP',
+        featured: true,
         description: 'Solución distribuida de prevención de fraude en e-commerce que estima la probabilidad de riesgo de estafa con Machine Learning y NLP (fine-tuning de DistilBERT con PyTorch/Transformers), desplegada en Azure.',
         badges: ['.NET Core', 'Flask', 'Next.js', 'MySQL', 'Machine Learning', 'DistilBERT', 'Azure'],
         image: '/images/scamshield.png',

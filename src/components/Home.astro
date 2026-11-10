@@ -11,6 +11,7 @@ import NavBar from "./NavBar.astro";
 import Projects from "./Projects.astro";
 import Stack from "./Stack.astro";
 import Training from "./Training.astro";
+import WhatsAppButton from "./WhatsAppButton.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -30,4 +31,5 @@ const { works, experiences } = DataDetector.detect(lang);
 		<Contact />
 	</main>
 	<Footer />
+	<WhatsAppButton />
 </Layout>
