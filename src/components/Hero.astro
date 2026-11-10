@@ -1,10 +1,16 @@
 ---
+import { GITHUB_URL, LINKEDIN_URL } from "../config/contact";
 import { getLangFromUrl, useTranslations } from "../i18n/util";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const isEs = lang === 'es';
+
+const impact = [1, 2, 3].map((n) => ({
+    value: t(`hero.impact.${n}.value`),
+    label: t(`hero.impact.${n}.label`),
+}));
 ---
 
 <section class="hero" aria-labelledby="hero-name">
@@ -13,14 +19,23 @@ const isEs = lang === 'es';
         <p class="hero-role">{t('dev.title')}</p>
         <h1 id="hero-name">{t('dev.name')}</h1>
         <p class="hero-tagline">{t('hero.tagline')}</p>
-        <p class="hero-metric">
-            <span class="material-icons" aria-hidden="true">trending_up</span>
-            {t('hero.metric')}
-        </p>
+        <dl class="hero-impact" aria-label={t('hero.impact.label')}>
+            {impact.map((item) => (
+                <div class="impact-item">
+                    <dt>{item.value}</dt>
+                    <dd>{item.label}</dd>
+                </div>
+            ))}
+        </dl>
         <div class="hero-ctas">
             <a href="#work-section" class="btn btn--primary">{t('hero.cta.works')}</a>
             <a href="#contact-section" class="btn btn--ghost">{t('hero.cta.contact')}</a>
         </div>
+        <ul class="hero-social">
+            <li><a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href={`/${lang}/terminal`}>{t('terminal.link')}</a></li>
+        </ul>
     </div>
 
     <div class="hero-side">
@@ -79,22 +94,57 @@ const isEs = lang === 'es';
         font-size: 1.15rem;
     }
 
-    .hero-metric {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem;
-        max-width: 52ch;
+    .hero-impact {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        max-width: 60ch;
         margin: 0 0 2rem;
+    }
+
+    .impact-item {
         padding: 0.75rem 1rem;
         border-left: 3px solid var(--color-accent);
         background-color: var(--color-accent-bg);
         border-radius: 0 var(--radius-badge) var(--radius-badge) 0;
-        font-size: 0.95rem;
     }
 
-    .hero-metric .material-icons {
-        color: var(--color-accent);
-        font-size: 1.25rem;
+    .impact-item dt {
+        color: var(--color-primary);
+        font-family: var(--font-heading);
+        font-size: 1.35rem;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .impact-item dd {
+        margin: 0.25rem 0 0;
+        color: var(--color-text-secondary);
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .hero-social {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 1.25rem;
+        margin: 1.25rem 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .hero-social a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-underline-offset: 3px;
+    }
+
+    .hero-social a:hover {
+        color: var(--color-accent-strong);
     }
 
     .hero-ctas {
@@ -170,6 +220,12 @@ const isEs = lang === 'es';
 
         .hero-side {
             display: none;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .hero-impact {
+            grid-template-columns: 1fr;
         }
     }
 </style>

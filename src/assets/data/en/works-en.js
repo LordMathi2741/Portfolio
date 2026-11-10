@@ -2,7 +2,8 @@ export const worksEn = [
     {
         category: 'thesis',
         context: 'Thesis · BTSym 2026',
-        title: 'ScamShield — A browser extension designed to reduce the risk of scams when making online purchases',
+        title: 'ScamShield — Scam prevention for online purchases with ML and NLP',
+        featured: true,
         description: 'Distributed fraud-prevention solution for e-commerce that estimates scam risk probability with Machine Learning and NLP (DistilBERT fine-tuning with PyTorch/Transformers), deployed on Azure.',
         badges: ['.NET Core', 'Flask', 'Next.js', 'MySQL', 'Machine Learning', 'DistilBERT', 'Azure'],
         image: '/images/scamshield.png',
