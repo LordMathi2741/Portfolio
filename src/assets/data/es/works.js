@@ -29,6 +29,15 @@ export const works = [
     },
     {
         category: 'client',
+        context: 'Cliente · FLUX Tecnología',
+        title: 'FLUX Tecnología — Catálogo de productos industriales',
+        description: 'Catálogo web de una importadora de maquinaria industrial y urea automotriz, con filtros, búsqueda y cotización por WhatsApp, más un panel de administración en React para el CRUD de productos. Backend serverless en Azure Functions sobre Firestore y Cloudinary, con autenticación Firebase y despliegue continuo a Cloudflare Pages.',
+        badges: ['JavaScript', 'React', 'Azure Functions', 'Node.js', 'Firestore', 'Firebase Auth', 'Cloudinary', 'Cloudflare Pages', 'GitHub Actions'],
+        image: '/images/flux-tecnologia.jpg',
+        url: 'https://flux-tecnologia-catalogo.pages.dev/'
+    },
+    {
+        category: 'client',
         context: 'Cliente · CORSERSAC S.A.C.',
         title: 'Validación y control de facturas',
         description: 'Sistema de validación y control de facturas para un organismo de inspección con acreditación ISO 17020, con gestión de estados y gráficos de consumo.',

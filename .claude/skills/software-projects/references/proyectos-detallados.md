@@ -147,6 +147,22 @@ App móvil (Flutter, Android/iOS) que reemplaza la hoja de campo de registro de 
 
 ---
 
+## FLUX Tecnología — Visualización de productos por catálogo
+**Contexto:** Proyecto para cliente (FLUX Tecnología, importadora de maquinaria industrial, urea automotriz y otros productos)
+**Repositorio:** `LordMathi2741/flux-technologies` (privado — no enlazar)
+**Enlace:** [Sitio público](https://flux-tecnologia-catalogo.pages.dev/)
+
+**Descripción:**
+Catálogo web de productos con dos frontends independientes. El sitio público (HTML5/CSS3/JavaScript vanilla, sin frameworks) muestra las líneas de negocio (maquinaria industrial, urea automotriz, otros productos) con filtros por categoría, búsqueda global, paginación, detalle de producto con varias imágenes y cotización vía WhatsApp. El panel de administración (React 19 + Vite) permite a los administradores autenticados registrar, editar y eliminar productos. Ningún cliente accede directamente a los datos: todo pasa por Azure Functions, que concentran el acceso a Cloud Firestore, Cloudinary (imágenes) y la verificación del ID Token de Firebase Authentication.
+
+**Stack:** HTML5, CSS3, JavaScript vanilla; React 19, Vite; Azure Functions (Node 22, modelo v4, Flex Consumption); Cloud Firestore, Firebase Authentication, Cloudinary; Cloudflare Pages; GitHub Actions
+**Arquitectura:** Frontends estáticos desacoplados + backend serverless como única capa con acceso a datos (C4 nivel 2 documentado); reglas de Firestore que deniegan todo acceso de cliente; caché en memoria invalidada por versión del catálogo
+**Migración:** desde un prototipo en Supabase a Firebase, con scripts de exportación / importación / verificación
+**Pruebas:** unitarias (`npm test`), E2E contra la Function App desplegada y QA de navegador con Playwright
+**CI/CD:** despliegue continuo de ambos frontends a Cloudflare Pages con GitHub Actions
+
+---
+
 ## ScamShield — Detección de estafas en compras digitales
 **Contexto:** Tesis de pregrado
 **Enlace:** [Demo](https://scamshield.ryzeon.dev/)
