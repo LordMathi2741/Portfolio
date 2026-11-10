@@ -11,7 +11,7 @@ Esta skill contiene la información real y verificada del candidato (estudiante 
 
 ## Resumen profesional (versión completa)
 
-> Estudiante de 9.° ciclo de Ingeniería de Software (UPC) y desarrollador Full-Stack con más de 1 año de experiencia en el sector financiero. Persona analítica, proactiva, entusiasta y enfocada en el trabajo en equipo y orientada a resultados.
+> Estudiante de 9.° ciclo de Ingeniería de Software (UPC) y desarrollador Full-Stack con más de 2 años de experiencia en el sector financiero. Persona analítica, proactiva, entusiasta y enfocada en el trabajo en equipo y orientada a resultados.
 
 Este es el texto base. Según el contexto, adáptalo de longitud (ver sección "Versiones por contexto" abajo), pero **nunca cambies los hechos** (ciclo, universidad, años de experiencia, sector).
 
@@ -26,7 +26,7 @@ Ver el detalle completo, bullets y logros cuantificados en `references/experienc
 
 | Empresa | Rol | Periodo | Cliente/Contexto |
 |---|---|---|---|
-| ITSIGHT CONSULTING | Practicante de Desarrollo de Software | 02/2025 – Actualidad | Cliente: Western Union |
+| Western Union (asignado por ITSIGHT Consulting) | Ingeniero de Software Junior | 02/2025 – Actualidad | Mostrar Western Union como empresa principal |
 | HiperFast SAC | FullStack Developer | 07/2024 – 01/2025 | Sistemas propios de la empresa |
 
 **Stack técnico evidenciado en la experiencia:** C#, ASP.NET Core, .NET Core, React, Vue.js, SQL Server, MySQL, Docker, JWT, OKTA, CyberArk, APIs RESTful, Checkmarx, OWASP Top 10.
