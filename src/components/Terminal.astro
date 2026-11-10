@@ -1,0 +1,484 @@
+---
+import { awards } from "../assets/data/awards";
+import { certfieds } from "../assets/data/certifieds";
+import { stack } from "../assets/data/stack.js";
+import { CV_URL, GITHUB_URL, LINKEDIN_URL, whatsappUrl } from "../config/contact";
+import { getLangFromUrl, useTranslations } from "../i18n/util";
+import DataDetector from "../utils/data-detector";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { works, experiences } = DataDetector.detect(lang);
+
+// Mismas fuentes de datos que la versión visual: el contenido nunca se duplica a mano
+const data = {
+    lang,
+    name: t('dev.name'),
+    role: t('dev.title'),
+    context: t('hero.context'),
+    tagline: t('hero.tagline'),
+    about: [t('about.p1'), t('about.p2')],
+    impact: [1, 2, 3].map((n) => `${t(`hero.impact.${n}.value`)} · ${t(`hero.impact.${n}.label`)}`),
+    experiences,
+    works,
+    stack: stack.map((group) => ({
+        title: t(group.key),
+        items: group.items.map((item) => (typeof item === 'string' ? item : item[lang])),
+    })),
+    education: {
+        degree: t('education.degree'),
+        school: t('education.school'),
+        status: t('education.status'),
+        thesis: t('education.thesis'),
+        publication: t('education.publication'),
+    },
+    certs: certfieds.map((c) => `${c.title} · ${c.issuer}${c.date ? ` · ${c.date}` : ''}`),
+    awards: awards.map((a) => `${a[lang].title} · ${a[lang].detail}`),
+    links: {
+        github: GITHUB_URL,
+        linkedin: LINKEDIN_URL,
+        cv: CV_URL,
+        whatsapp: whatsappUrl(t('contact.whatsapp.message')),
+    },
+};
+
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+const quick = ['help', 'about', 'experience', 'projects', 'stack', 'contact', 'gui'];
+---
+
+<div class="term-page">
+    <header class="term-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="term-title">mathias@portfolio: ~</span>
+        <a class="term-gui" href={`/${lang}/`}>
+            <span class="material-icons" aria-hidden="true">web</span>
+            {t('terminal.gui')}
+        </a>
+    </header>
+
+    <nav class="term-quick" aria-label={t('terminal.link')}>
+        {quick.map((cmd) => <button type="button" data-cmd={cmd}>{cmd}</button>)}
+    </nav>
+
+    <main class="term-body" id="term-body">
+        <h1 class="sr-only">{t('dev.name')} · {t('terminal.link')}</h1>
+        <div id="term-output" role="log" aria-live="polite"></div>
+        <form id="term-form" class="term-line" autocomplete="off">
+            <label for="term-input" class="prompt">guest@mathias:~$</label>
+            <input id="term-input" type="text" spellcheck="false" autocapitalize="off" autofocus />
+        </form>
+    </main>
+</div>
+
+<script type="application/json" id="term-data" set:html={json} />
+
+<script>
+    type Seg = string | { text: string; cls?: string; href?: string };
+
+    const D = JSON.parse(document.getElementById('term-data')!.textContent!);
+    const es = D.lang === 'es';
+    const L = (s: string, e: string) => (es ? s : e);
+
+    const out = document.getElementById('term-output')!;
+    const form = document.getElementById('term-form') as HTMLFormElement;
+    const input = document.getElementById('term-input') as HTMLInputElement;
+    const body = document.getElementById('term-body')!;
+
+    // Construye nodos con textContent: el contenido nunca se interpreta como HTML
+    function line(...segs: Seg[]) {
+        const div = document.createElement('div');
+        div.className = 'out-line';
+        for (const seg of segs) {
+            if (typeof seg === 'string') {
+                div.append(seg);
+                continue;
+            }
+            const el = document.createElement(seg.href ? 'a' : 'span');
+            el.textContent = seg.text;
+            if (seg.cls) el.className = seg.cls;
+            if (seg.href && el instanceof HTMLAnchorElement) {
+                el.href = seg.href;
+                el.target = '_blank';
+                el.rel = 'noopener';
+            }
+            div.append(el);
+        }
+        out.append(div);
+    }
+
+    const blank = () => line('');
+    const h = (text: string) => line({ text, cls: 'c-head' });
+    const bullet = (text: string, cls = 'c-muted') => line({ text: '  • ', cls }, text);
+
+    const commands: Record<string, { desc: [string, string]; run: (args: string[]) => void }> = {
+        help: {
+            desc: ['muestra esta ayuda', 'show this help'],
+            run: () => {
+                h(L('Comandos disponibles', 'Available commands'));
+                for (const [name, cmd] of Object.entries(commands)) {
+                    line({ text: `  ${name.padEnd(12)}`, cls: 'c-accent' }, L(...cmd.desc));
+                }
+                blank();
+                line({ text: L('Tip: usa Tab para autocompletar y ↑/↓ para el historial.', 'Tip: use Tab to autocomplete and ↑/↓ for history.'), cls: 'c-muted' });
+            },
+        },
+        about: {
+            desc: ['quién soy', 'who I am'],
+            run: () => {
+                h(`${D.name} — ${D.role}`);
+                line({ text: D.context, cls: 'c-muted' });
+                blank();
+                line(D.tagline);
+                blank();
+                D.about.forEach((p: string) => { line(p); blank(); });
+                h(L('Resultados en producción', 'Results in production'));
+                D.impact.forEach((i: string) => bullet(i, 'c-ok'));
+            },
+        },
+        experience: {
+            desc: ['experiencia profesional', 'work experience'],
+            run: () => {
+                D.experiences.forEach((x: any, i: number) => {
+                    if (i) blank();
+                    line({ text: x.company, cls: 'c-head' }, { text: `  ${x.date}`, cls: 'c-muted' });
+                    line({ text: `${x.title} · ${x.location}`, cls: 'c-muted' });
+                    x.achievements?.forEach((a: string) => bullet(a, 'c-ok'));
+                    line({ text: `  [${x.tags.join(', ')}]`, cls: 'c-accent' });
+                });
+            },
+        },
+        projects: {
+            desc: ['proyectos · "projects 1" para ver detalle', 'projects · "projects 1" for details'],
+            run: ([n]) => {
+                const idx = Number(n) - 1;
+                const p = D.works[idx];
+                if (n && !p) {
+                    line({ text: L(`No existe el proyecto ${n}.`, `Project ${n} does not exist.`), cls: 'c-err' });
+                    return;
+                }
+                if (p) {
+                    h(p.title);
+                    line({ text: p.context, cls: 'c-muted' });
+                    blank();
+                    line(p.description);
+                    line({ text: `[${p.badges.join(', ')}]`, cls: 'c-accent' });
+                    if (p.url && p.url !== '#') line('→ ', { text: p.url, href: p.url });
+                    return;
+                }
+                D.works.forEach((w: any, i: number) => {
+                    line({ text: `  ${String(i + 1).padStart(2)}. `, cls: 'c-accent' }, w.title, { text: `  (${w.context})`, cls: 'c-muted' });
+                });
+                blank();
+                line({ text: L('Escribe "projects <n>" para ver el detalle.', 'Type "projects <n>" for details.'), cls: 'c-muted' });
+            },
+        },
+        stack: {
+            desc: ['stack técnico', 'tech stack'],
+            run: () => D.stack.forEach((g: any) => line({ text: `  ${g.title.padEnd(26)}`, cls: 'c-accent' }, g.items.join(', '))),
+        },
+        education: {
+            desc: ['formación, tesis y publicación', 'education, thesis and publication'],
+            run: () => {
+                h(D.education.degree);
+                line(D.education.school);
+                line({ text: D.education.status, cls: 'c-muted' });
+                blank();
+                line({ text: L('Tesis: ', 'Thesis: '), cls: 'c-accent' }, D.education.thesis);
+                blank();
+                line({ text: L('Publicación: ', 'Publication: '), cls: 'c-accent' }, D.education.publication);
+            },
+        },
+        certs: {
+            desc: ['certificaciones y premios', 'certifications and awards'],
+            run: () => {
+                h(L('Certificaciones', 'Certifications'));
+                D.certs.forEach((c: string) => bullet(c));
+                blank();
+                h(L('Premios y reconocimientos', 'Awards & recognition'));
+                D.awards.forEach((a: string) => bullet(a));
+            },
+        },
+        contact: {
+            desc: ['canales de contacto', 'contact channels'],
+            run: () => {
+                if (D.links.whatsapp) line({ text: '  whatsapp  ', cls: 'c-accent' }, { text: L('Escríbeme por WhatsApp', 'Chat on WhatsApp'), href: D.links.whatsapp });
+                line({ text: '  linkedin  ', cls: 'c-accent' }, { text: D.links.linkedin, href: D.links.linkedin });
+                line({ text: '  github    ', cls: 'c-accent' }, { text: D.links.github, href: D.links.github });
+                line({ text: '  cv        ', cls: 'c-accent' }, { text: L('Descargar CV', 'Download CV'), href: D.links.cv });
+            },
+        },
+        whatsapp: {
+            desc: ['abre un chat de WhatsApp', 'open a WhatsApp chat'],
+            run: () => open(D.links.whatsapp, L('WhatsApp aún no está configurado. Usa "contact".', 'WhatsApp is not configured yet. Use "contact".')),
+        },
+        cv: { desc: ['abre mi CV', 'open my CV'], run: () => open(D.links.cv) },
+        theme: {
+            desc: ['cambia el tema: theme [light|dark]', 'switch theme: theme [light|dark]'],
+            run: ([mode]) => {
+                const root = document.documentElement;
+                const dark = mode ? mode === 'dark' : root.getAttribute('data-theme') !== 'dark';
+                if (dark) root.setAttribute('data-theme', 'dark');
+                else root.removeAttribute('data-theme');
+                try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+                line({ text: L(`Tema: ${dark ? 'oscuro' : 'claro'}`, `Theme: ${dark ? 'dark' : 'light'}`), cls: 'c-ok' });
+            },
+        },
+        lang: {
+            desc: ['cambia el idioma: lang [es|en]', 'switch language: lang [es|en]'],
+            run: ([to]) => { window.location.href = `/${to === 'en' || to === 'es' ? to : es ? 'en' : 'es'}/terminal`; },
+        },
+        clear: { desc: ['limpia la pantalla', 'clear the screen'], run: () => out.replaceChildren() },
+        gui: { desc: ['vuelve a la versión visual', 'back to the visual version'], run: () => { window.location.href = `/${D.lang}/`; } },
+    };
+
+    const aliases: Record<string, string> = { whoami: 'about', exit: 'gui', ls: 'help', experiencia: 'experience', proyectos: 'projects', contacto: 'contact', formacion: 'education', tema: 'theme' };
+
+    function open(url: string | null, missing?: string) {
+        if (!url) {
+            line({ text: missing ?? '', cls: 'c-err' });
+            return;
+        }
+        window.open(url, '_blank', 'noopener');
+        line({ text: L('Abriendo ', 'Opening '), cls: 'c-muted' }, { text: url, href: url });
+    }
+
+    const history: string[] = [];
+    let cursor = 0;
+
+    function exec(raw: string) {
+        const text = raw.trim();
+        line({ text: 'guest@mathias:~$ ', cls: 'c-prompt' }, text);
+        if (!text) return;
+        history.push(text);
+        cursor = history.length;
+        const [name, ...args] = text.toLowerCase().split(/\s+/);
+        const cmd = commands[aliases[name] ?? name];
+        if (cmd) cmd.run(args);
+        else line({ text: L(`comando no encontrado: ${name}. Escribe "help".`, `command not found: ${name}. Type "help".`), cls: 'c-err' });
+        blank();
+        body.scrollTop = body.scrollHeight;
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        exec(input.value);
+        input.value = '';
+    });
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp' && cursor > 0) {
+            e.preventDefault();
+            input.value = history[--cursor];
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            cursor = Math.min(cursor + 1, history.length);
+            input.value = history[cursor] ?? '';
+        } else if (e.key === 'Tab' && input.value) {
+            const matches = Object.keys(commands).filter((c) => c.startsWith(input.value.toLowerCase()));
+            if (matches.length === 1) {
+                e.preventDefault();
+                input.value = matches[0] + ' ';
+            } else if (matches.length > 1) {
+                e.preventDefault();
+                line({ text: matches.join('   '), cls: 'c-muted' });
+            }
+        } else if (e.key === 'l' && e.ctrlKey) {
+            e.preventDefault();
+            out.replaceChildren();
+        }
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('.term-quick button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            exec(btn.dataset.cmd!);
+            input.focus();
+        });
+    });
+
+    // clic en el área vacía devuelve el foco al prompt, sin robar selecciones de texto ni clics en enlaces
+    body.addEventListener('click', (e) => {
+        if (!(e.target as HTMLElement).closest('a') && !window.getSelection()?.toString()) input.focus();
+    });
+
+    line({ text: `${D.name} — ${D.role}`, cls: 'c-head' });
+    line({ text: D.tagline, cls: 'c-muted' });
+    blank();
+    line(L('Bienvenido a la versión terminal. Escribe ', 'Welcome to the terminal version. Type '), { text: 'help', cls: 'c-accent' }, L(' para empezar.', ' to get started.'));
+    blank();
+</script>
+
+<style>
+    .term-page {
+        --term-bg: #F7F9FC;
+        --term-surface: #FFFFFF;
+        --term-text: #1C1E21;
+        --term-muted: #5B6472;
+        --term-accent: #0369A1;
+        --term-ok: #15803D;
+        --term-err: #B91C1C;
+        --term-head: #0A2540;
+
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        height: 100dvh;
+        background-color: var(--term-bg);
+        color: var(--term-text);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    :global([data-theme="dark"]) .term-page {
+        --term-bg: #0B1120;
+        --term-surface: #0F172A;
+        --term-text: #E2E8F0;
+        --term-muted: #94A3B8;
+        --term-accent: #38BDF8;
+        --term-ok: #4ADE80;
+        --term-err: #F87171;
+        --term-head: #F1F5F9;
+    }
+
+    .term-bar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--term-surface);
+        border-bottom: 1px solid var(--color-border);
+        font-size: 0.85rem;
+    }
+
+    .dots {
+        display: inline-flex;
+        gap: 6px;
+    }
+
+    .dots i {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #FF5F57;
+    }
+
+    .dots i:nth-child(2) { background-color: #FEBC2E; }
+    .dots i:nth-child(3) { background-color: #28C840; }
+
+    .term-title {
+        flex: 1;
+        color: var(--term-muted);
+        text-align: center;
+    }
+
+    .term-gui {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        min-height: 44px;
+        color: var(--term-accent);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .term-gui:hover {
+        text-decoration: underline;
+    }
+
+    .term-gui .material-icons {
+        font-size: 1.1rem;
+    }
+
+    .term-quick {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        overflow-x: auto;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .term-quick button {
+        flex-shrink: 0;
+        min-height: 36px;
+        padding: 0 0.85rem;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--term-accent);
+        font: inherit;
+        font-size: 0.85rem;
+        cursor: pointer;
+    }
+
+    .term-quick button:hover {
+        border-color: var(--term-accent);
+    }
+
+    .term-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem 1.25rem 2rem;
+        font-size: 0.92rem;
+        line-height: 1.6;
+    }
+
+    #term-output :global(.out-line) {
+        min-height: 1.6em;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+    #term-output :global(a) {
+        color: var(--term-accent);
+        text-underline-offset: 3px;
+    }
+
+    #term-output :global(.c-head) { color: var(--term-head); font-weight: 700; }
+    #term-output :global(.c-muted) { color: var(--term-muted); }
+    #term-output :global(.c-accent) { color: var(--term-accent); }
+    #term-output :global(.c-ok) { color: var(--term-ok); }
+    #term-output :global(.c-err) { color: var(--term-err); }
+    #term-output :global(.c-prompt) { color: var(--term-ok); font-weight: 600; }
+
+    .term-line {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .prompt {
+        flex-shrink: 0;
+        color: var(--term-ok);
+        font-weight: 600;
+    }
+
+    #term-input {
+        flex: 1;
+        min-width: 0;
+        min-height: 36px;
+        border: 0;
+        background: transparent;
+        color: var(--term-text);
+        font: inherit;
+        caret-color: var(--term-accent);
+    }
+
+    #term-input:focus {
+        outline: none;
+    }
+
+    .term-line:focus-within {
+        outline: 2px solid var(--term-accent);
+        outline-offset: 4px;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 480px) {
+        .term-title {
+            display: none;
+        }
+
+        .term-body {
+            padding: 0.75rem 1rem 2rem;
+            font-size: 0.85rem;
+        }
+    }
+</style>
