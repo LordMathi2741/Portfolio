@@ -29,6 +29,15 @@ export const worksEn = [
     },
     {
         category: 'client',
+        context: 'Client · FLUX Tecnología',
+        title: 'FLUX Tecnología — Industrial product catalog',
+        description: 'Web catalog for an importer of industrial machinery and automotive urea, with filters, search and WhatsApp quotes, plus a React admin panel for product CRUD. Serverless backend on Azure Functions over Firestore and Cloudinary, with Firebase authentication and continuous deployment to Cloudflare Pages.',
+        badges: ['JavaScript', 'React', 'Azure Functions', 'Node.js', 'Firestore', 'Firebase Auth', 'Cloudinary', 'Cloudflare Pages', 'GitHub Actions'],
+        image: '/images/flux-tecnologia.jpg',
+        url: 'https://flux-tecnologia-catalogo.pages.dev/'
+    },
+    {
+        category: 'client',
         context: 'Client · HIPERFAST S.A.C.',
         title: 'Invoice Validation and Control',
         description: 'Invoice validation and control system for an inspection body with ISO 17020 accreditation, featuring state management and consumption charts.',
