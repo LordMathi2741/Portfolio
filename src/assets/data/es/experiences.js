@@ -1,7 +1,7 @@
 export const experiences = [
     {
         title: "Ingeniero de Software Junior",
-        company: "ITSIGHT Consulting (cliente Western Union)",
+        company: "Western Union (asignado por ITSIGHT Consulting)",
         location: "Lima, Perú",
         date: "Feb 2025 - Actualidad",
         tags: ["C#", "ASP.NET Core (.NET 8)", "SQL Server", "SSIS", "Azure", "Okta", "CyberArk", "RBAC", "Checkmarx", "Arquitectura Hexagonal"],
